@@ -11,6 +11,11 @@
 <html lang="en">
 <head>
     <jsp:include page="/WEB-INF/views/back-end/customer/common/css.jsp"></jsp:include>
+    <style type="text/css">
+    	.er {
+    		color :red;
+    	}
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -28,13 +33,14 @@
                             	
                             	<div class="right__inputWrapper">
 									<label> Họ và tên :</label>
-									<form:input type="text" class="form-control" path="name" required="required"/>
+									<form:input type="text" class="form-control" path="name"  required="required"/>
 								</div>
                             	<div class="right__inputWrapper">
                                 	<label>Tên đăng nhập :</label>
-									<form:input type="text" class="form-control" path="username" required="required"/>
+									<form:input type="text" class="form-control" path="username" required="required" />
+									<form:errors path="username" cssClass="er"></form:errors>
                                 </div>
-                            	
+                            	<form:hidden class="form-control" path="password"/>
                                 <div class="right__inputWrapper">
                                 	<label>Email :</label>
 									<form:input type="text" class="form-control" path="email" required="required"/>

@@ -22,6 +22,8 @@ public class CustomSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 		MyUserDetail userLogined = getUserLogined();
 		request.getSession().setAttribute("USER", userLogined.getUser().getUsername());
 		request.getSession().setAttribute("memberName", userLogined.getUser().getName());
+		request.getSession().removeAttribute("gCART");
+//		request.getSession().removeAttribute("NUM_CART");
 		@SuppressWarnings("unchecked")
 		Set<GrantedAuthority> authors = (Set<GrantedAuthority>) userLogined.getAuthorities();
 		for (GrantedAuthority author : authors) {

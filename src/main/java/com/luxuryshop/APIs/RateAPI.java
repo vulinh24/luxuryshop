@@ -1,6 +1,7 @@
 package com.luxuryshop.APIs;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -34,12 +35,11 @@ public class RateAPI {
 		try {
 			MyUserDetail udetail = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			PKOfCart pk = new PKOfCart(udetail.getUser().getId(),rateModel.getProductId());
-			RateProduct rate = null;
-			rate = rateRepository.findByUserProduct(udetail.getUser().getId(),rateModel.getProductId());
-			if (rate == null) {
+			Optional<RateProduct> op = rateRepository.findById(pk);
+			if (op.isEmpty()) {
 				Product product = productRepository.getById(pk.getProductId());
 				List<RateProduct> old = product.getRates();
-				rate = new RateProduct();
+				RateProduct rate = new RateProduct();
 				rate.setPk(pk);
 				rate.setRate(rateModel.getRate());
 				rate.setUser(udetail.getUser());
@@ -53,6 +53,7 @@ public class RateAPI {
 				product.setRate(newRate);
 				
 			} else {
+				RateProduct rate = op.get();
 				rate.setRate(rateModel.getRate());
 				rateRepository.save(rate);
 				Product product = productRepository.getById(pk.getProductId());

@@ -141,14 +141,7 @@
 									</c:choose>
 			                        <div class="product__item__text">
 			                            <h6>${item.title }</h6>
-			                            <c:choose>
-			                            	<c:when test="${not empty USER }">
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
-			                            	</c:when>
-			                            	<c:otherwise>
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="linhcustom2();" >+ Thêm vào giỏ hàng</a>
-			                            	</c:otherwise>
-			                            </c:choose>
+			                            <a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
 			                            
 			                           
 			                            <div class="rating d-flex">
@@ -221,14 +214,7 @@
 			                        <div class="product__item__text">
 			                            <h6>${item.title }</h6>
 			                            
-			                            <c:choose>
-			                            	<c:when test="${not empty USER }">
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
-			                            	</c:when>
-			                            	<c:otherwise>
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="linhcustom2();" >+ Thêm vào giỏ hàng</a>
-			                            	</c:otherwise>
-			                            </c:choose>
+			                            <a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
 			                            
 			                            <div class="rating d-flex">
 			                                <c:forEach begin="1" end="${item.rate }">
@@ -300,14 +286,7 @@
 			                        <div class="product__item__text">
 			                            <h6>${item.title }</h6>
 			                            
-			                            <c:choose>
-			                            	<c:when test="${not empty USER }">
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
-			                            	</c:when>
-			                            	<c:otherwise>
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="linhcustom2();" >+ Thêm vào giỏ hàng</a>
-			                            	</c:otherwise>
-			                            </c:choose>
+			                           <a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
 			                            
 			                            <div class="rating d-flex">
 			                                <c:forEach begin="1" end="${item.rate }">
@@ -373,7 +352,7 @@
                                 <p>Giây</p>
                             </div>
                         </div>
-                        <a href="${pageContext.request.contextPath}/shop-details/sofa-da-italia-charlize-1637119475562" class="primary-btn">Mua ngay</a>
+                        <a href="${pageContext.request.contextPath}/shop-details/mvvk2-mvvm2-macbook-pro-16-inch-2019-i9-2-3-64gb-8tb-1609917082161" class="primary-btn">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -446,14 +425,7 @@
 			                        <div class="product__item__text">
 			                            <h6>${item.title }</h6>
 			                            
-			                            <c:choose>
-			                            	<c:when test="${not empty USER }">
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
-			                            	</c:when>
-			                            	<c:otherwise>
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="linhcustom2();" >+ Thêm vào giỏ hàng</a>
-			                            	</c:otherwise>
-			                            </c:choose>
+			                            <a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${item.id}, 1)" >+ Thêm vào giỏ hàng</a>
 			                            
 			                            <div class="rating d-flex">
 			                                <c:forEach begin="1" end="${item.rate }">

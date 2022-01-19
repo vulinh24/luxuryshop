@@ -57,9 +57,7 @@ public class IndexController {
 					num_cart += cart.getQuantity();
 				}
 				session.setAttribute("NUM_CART", num_cart);
-			} else {
-				session.removeAttribute("NUM_CART");
-			}
+			} 
 			
 			model.addAttribute("blogs", blogRepository.findAll());
 			model.addAttribute("productsHot",productRepository.findByIsHotTrue());

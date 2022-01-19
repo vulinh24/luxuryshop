@@ -93,7 +93,7 @@
 							<sec:authorize access="hasAuthority('ROLE_MEMBER')">
 								<a href="${pageContext.request.contextPath}/customer"><img src="${pageContext.request.contextPath}/images/user-profile.png" alt=""></a>
 							</sec:authorize>
-                        <a href="${pageContext.request.contextPath}/shopping-cart" <c:if test="${empty USER }">onclick="linhcustom();"</c:if> >
+                        <a href="${pageContext.request.contextPath}/shopping-cart">
                         	<img style="heigth:30px;width:30px;" src="${pageContext.request.contextPath}/images/cart_ll.png" alt=""> <span class="badge badge-secondary" style="font-size:12px;">${NUM_CART }</span>
                         </a>
                         

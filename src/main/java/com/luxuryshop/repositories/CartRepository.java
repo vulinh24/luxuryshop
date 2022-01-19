@@ -18,9 +18,6 @@ public interface CartRepository extends JpaRepository<Cart, PKOfCart> {
 	@Query(value = "FROM Cart c WHERE c.user.username = ?1")
 	public List<Cart> findByUserName(String username);
 	
-	@Query(value = "FROM Cart c WHERE c.pk.userId = ?1 AND c.pk.productId = ?2")
-	public Cart findByUserProduct(Integer userId, Integer productId);
-	
 	@Transactional
 	@Modifying
 	@Query(value= "DELETE FROM Cart c WHERE c.user.id = ?1")

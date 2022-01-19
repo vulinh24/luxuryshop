@@ -13,6 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,22 +34,29 @@ public class User extends ParentEntity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8688323980624037918L;
-
+	
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled = Boolean.TRUE;
-
+	
+	@NotBlank(message = "this field cannot be empty!")
+	@Size(min = 5, max = 50 , message = "username from 5 to 50 characters")
 	@Column(name = "username", length = 45, nullable = false)
 	private String username;
-
+	
+	@NotBlank(message = "this field cannot be empty!")
+	@Size(min = 6, max = 60, message = "password must be greater than 6")
 	@Column(name = "password", length = 60, nullable = false)
 	private String password;
-
+	
+	@NotBlank(message = "this field cannot be empty!")
+	@Email(message = "this is not an email")
 	@Column(name = "email", length = 45, nullable = false)
 	private String email;
 
 	@Column(name = "name", length = 100, nullable = true)
 	private String name;
-
+	
+	@Size(min = 5 , max = 13 , message = "PhoneNumber's invalid")
 	@Column(name = "phone", length = 15, nullable = true)
 	private String phone;
 

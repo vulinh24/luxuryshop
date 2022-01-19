@@ -226,14 +226,8 @@
 			                        <div class="product__item__text">
 			                            <h6>${product.title }</h6>
 			                            <!-- code api in javascript.js -->
-			                            <c:choose>
-			                            	<c:when test="${not empty USER }">
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${product.id}, 1)" >+ Thêm vào giỏ hàng</a>
-			                            	</c:when>
-			                            	<c:otherwise>
-			                            		<a href="javascript:void(0)" class="add-cart" onclick="linhcustom2();" >+ Thêm vào giỏ hàng</a>
-			                            	</c:otherwise>
-			                            </c:choose>
+			                            <a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${product.id}, 1)" >+ Thêm vào giỏ hàng</a>
+			                            
 			                            <div class="rating">
 			                                <c:forEach begin="1" end="${product.rate }">
 			                            		<img width="15px" src="${pageContext.request.contextPath}/images/yellow-star.png">

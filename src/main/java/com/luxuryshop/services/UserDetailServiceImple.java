@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 import com.luxuryshop.entities.User;
 import com.luxuryshop.repositories.UserRepository;
 
+@Service
 public class UserDetailServiceImple implements UserDetailsService {
 
 	@Autowired

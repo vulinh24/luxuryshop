@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -27,8 +28,9 @@ public class SolveException {
 		}
 	}
 	
-//	@ExceptionHandler(value = Exception.class)
-//	public void handle() {
-//		
-//	}
+	@ExceptionHandler(value = BindException.class)
+	public String handleBind(BindException e) {
+		return "redirect:/customer";
+	}
+	
 }

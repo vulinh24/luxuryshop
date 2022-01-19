@@ -1,7 +1,10 @@
 package com.luxuryshop.controller.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +22,7 @@ import com.luxuryshop.model.ProductFilterModel;
 import com.luxuryshop.repositories.CartRepository;
 import com.luxuryshop.repositories.ImageRepository;
 import com.luxuryshop.repositories.ProductDetailRepository;
+import com.luxuryshop.repositories.ProductRepository;
 import com.luxuryshop.repositories.UserRepository;
 import com.luxuryshop.services.MyUserDetail;
 import com.luxuryshop.services.ProductService;
@@ -58,6 +62,9 @@ public class ShopController {
 	
 	@Autowired
 	CartRepository cartRepository;
+	
+	@Autowired
+	ProductRepository productRepository;
 	
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String index(Model model) throws Exception{
@@ -213,19 +220,42 @@ public class ShopController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = { "/shopping-cart" }, method = RequestMethod.GET)
 	public String cart(Model model) throws Exception {
 		try {
-			MyUserDetail userDetail = (MyUserDetail) 
-					SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			User user = userDetail.getUser();
-			List<Cart> carts = cartRepository.findByUserName(user.getUsername());
-		
-			model.addAttribute("CART",carts);
-			model.addAttribute("cate", "shop");
-			String checkout = request.getParameter("checkout");
-			model.addAttribute("checkout",checkout);
-			return "front-end/shopping-cart";
+			HttpSession session = request.getSession();
+			if (session.getAttribute("USER") != null) {
+				MyUserDetail userDetail = (MyUserDetail) 
+						SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				User user = userDetail.getUser();
+				List<Cart> carts = cartRepository.findByUserName(user.getUsername());
+			
+				model.addAttribute("CART",carts);
+				model.addAttribute("cate", "shop");
+				String checkout = request.getParameter("checkout");
+				model.addAttribute("checkout",checkout);
+				return "front-end/shopping-cart";
+			} else {
+				List<Cart> carts = new ArrayList<>();
+				Map<Integer, Integer> gCART = (Map<Integer, Integer>) session.getAttribute("gCART");
+				if (gCART != null) {
+					Set<Integer> proIds = gCART.keySet();
+					for (Integer prodId : proIds) {
+						Product prod = productRepository.getById(prodId);
+						Cart cart = new Cart();
+						cart.setProductCart(prod);
+						cart.setQuantity(gCART.get(prodId));
+						carts.add(cart);
+					}
+				}
+				
+				model.addAttribute("CART",carts);
+				model.addAttribute("cate", "shop");
+				String checkout = request.getParameter("checkout");
+				model.addAttribute("checkout",checkout);
+				return "front-end/shopping-cart";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CustomException();

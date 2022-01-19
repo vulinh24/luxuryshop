@@ -1,15 +1,20 @@
 package com.luxuryshop.configurations;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.luxuryshop.executeapi.JwtAuthenticationFilter;
 import com.luxuryshop.services.UserDetailServiceImple;
 
 
@@ -58,10 +63,12 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**")//.authenticated()
 				//edit
 				.hasAnyRole("ADMIN","TESTADMIN")
+				.antMatchers("/api/v1/change/**")
+				.hasRole("ADMIN")
 				.antMatchers("/").permitAll()
 				//end edit
 				.and() // kết hợp với điều kiện.
-				.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
+				.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).authenticationEntryPoint(new CustomHttp403ForbiddenEntryPoint())
 				
 				.and()
 				// khi click vào button logout thì không cần login.
@@ -83,23 +90,37 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
 	            .failureUrl("/login?page_error=true") // nhập username, password sai thì redirect về trang nào.
 	            .permitAll()
 	            .and()
-	            .rememberMe();
+	            .sessionManagement()
+	            .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //stateless
+	            ;
+				
+		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
+//	@Bean
+//    public UserDetailsService userDetailsService() {
+//        return new UserDetailServiceImple();
+//    }
+    
 	@Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailServiceImple();
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        // Get AuthenticationManager bean
+        return super.authenticationManagerBean();
     }
-     
+	
+	@Autowired
+	UserDetailServiceImple userDetailsService;
+	
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-     
+    
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
          
         return authProvider;
@@ -108,6 +129,11 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
+    }
+    
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
     }
 
 }

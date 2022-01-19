@@ -16,6 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,7 +46,8 @@ public class Product extends ParentEntity implements Serializable, Comparable<Pr
 	
 	@Column(name = "short_description", nullable = true, columnDefinition = "TEXT")
 	private String shortDescription;
-
+	
+	@JsonIgnore
 	@Lob
 	@Column(name = "detail_description", nullable = true, columnDefinition = "LONGTEXT")
 	private String detailDescription;
@@ -62,26 +67,36 @@ public class Product extends ParentEntity implements Serializable, Comparable<Pr
 	@Column(name = "rate", columnDefinition = "integer default 5")
 	private Integer rate;
 	
+	// get only specific property in relation: many-to-one or one-to-many ,...
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne
 	@JoinColumn (name = "category_id" , nullable = true )
 	private Category category;
 	
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "path")
+	@JsonIdentityReference(alwaysAsId = true)
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<ProductImages> productImages = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "productCart" , fetch = FetchType.LAZY , cascade = CascadeType.REMOVE)
 	private List<Cart> carts = new ArrayList<>(); // focus
 	
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne
 	@JoinColumn(name = "collection_id" , nullable = true)
 	private Collection collection;
 	
-	@OneToOne(mappedBy = "product",  cascade = CascadeType.REMOVE)
+	@OneToOne(mappedBy = "product",  cascade = CascadeType.ALL)
 	private ProductDetail productDetail;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "fProducts" , fetch = FetchType.LAZY)
 	List<User> likedUsers;
 	
+	@JsonIgnore
 	@OneToMany (mappedBy = "product" , fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	List<RateProduct> rates;
 	@Override

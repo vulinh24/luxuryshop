@@ -47,7 +47,6 @@ public class AdminSlideController {
 		return "back-end/insert_slide";
 	}
 	
-	@SuppressWarnings("null")
 	@Transactional
 	@RequestMapping(value = {"/admin/slide-add"}, method = RequestMethod.POST )
 	public String add(@RequestParam(name = "banner_image") MultipartFile files,@ModelAttribute Banner banner, final ModelMap model, final HttpServletRequest request, final HttpServletResponse Response ) throws Exception{

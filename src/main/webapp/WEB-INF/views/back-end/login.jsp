@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" type="text/css">
+	<style type="text/css">
+		.errorreg {
+			color : red;
+		}
+	</style>
 </head>
 <body>
 	<div class="login__form">
@@ -48,15 +54,18 @@
 				<button class="submit-btn" type="submit">Đăng nhập</button>
 				
 			</form>
-			<form id="register" class="input-group" method="post" action="/registion" > 
-				<input type="text" class="input-field" placeholder="Tên đăng nhập" required name="username">
-				<input type="text" class="input-field" placeholder="Tên của bạn" required name="name">
-				<input type="email" class="input-field" placeholder="Email" required name="email">
-				<input id="passwordr" type="password" class="input-field" placeholder="Mật khẩu" required name="password">
+			<form:form id="register" class="input-group" method="post" action="/registion" modelAttribute="user"> 
+				<form:input type="text" class="input-field" placeholder="Tên đăng nhập" required="required" path="username" />
+				<form:errors style="position:sticky;" path="username" cssClass="errorreg"></form:errors>
+				<form:input type="text" class="input-field" placeholder="Tên của bạn" path="name"/>
+				<form:input type="email" class="input-field" placeholder="Email" required="required" path="email"/>
+				<form:errors style="position:sticky;" path="email" cssClass="errorreg"></form:errors>
+				<form:input id="passwordr" type="password" class="input-field" required="required" placeholder="Mật khẩu" path="password"/>
+                <form:errors style="position:sticky;" path="password" cssClass="errorreg"></form:errors>
                 <input id="confirm_passwordr" type="password" class="input-field" placeholder="Nhập lại mật khẩu" required name="password-again">
 				<input type="checkbox" class="check-box" checked ><span>Tôi chấp nhận những điều khoản trên.</span>
 				<button type="submit" class="submit-btn">Đăng kí</button>
-			</form>
+			</form:form>
             <div class="cancel">
                 <button value="Redirect Me" onclick="Redirect();" ><img src="${pageContext.request.contextPath}/images/arrow-left.png"><span>
                     Trở về trang chủ
@@ -64,6 +73,7 @@
             </div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 		<c:if test="${not empty userexist}">
 		window.alert("Tên tài khoản đã tồn tại!");
@@ -111,5 +121,12 @@
             window.location="${pageContext.request.contextPath}/"; 
         }
     </script>
+   
+    <c:if test="${user.username != null || user.username != ''}">
+			<script type="text/javascript">
+				register();
+			</script>
+	</c:if>
+	
 </body>
 </html>

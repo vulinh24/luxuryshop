@@ -1,5 +1,7 @@
 package com.luxuryshop.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +41,9 @@ public class SaledProduct {
 	
 	@Column(name = "quantity")
 	private Integer quantity;
+	
+	@Column(name = "selled_date")
+	private Date selledDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "order_id")
