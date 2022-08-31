@@ -188,6 +188,16 @@ public abstract class AbsRepository<R extends TableRecordImpl<R>, P, ID> impleme
     }
 
     @Override
+    public List<P> getList(OrderField<?> orderField, int offset, int limit, List<Condition> conditions) {
+        return dslContext.selectFrom(getTable())
+                .where(conditions)
+                .orderBy(orderField)
+                .offset(offset)
+                .limit(limit)
+                .fetchInto(pojoClass);
+    }
+
+    @Override
     public Integer deletedByCondition(Condition... conditions) {
         return dslContext.deleteFrom(getTable())
                 .where(conditions)

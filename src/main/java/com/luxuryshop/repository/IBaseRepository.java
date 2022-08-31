@@ -83,6 +83,8 @@ public interface IBaseRepository<P, ID> {
 
     List<P> getList(OrderField<?> orderField, Condition... conditions);
 
+    List<P> getList(OrderField<?> orderField, int offset, int limit, List<Condition> conditions);
+
 //    List<P> findAllAndSort(OrderField<?> orderField);
 
     Integer deletedByCondition(Condition... conditions);
