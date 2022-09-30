@@ -1,26 +1,17 @@
 package com.luxuryshop.entities;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.PreRemove;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -37,26 +28,26 @@ public class User extends ParentEntity implements Serializable {
 	
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled = Boolean.TRUE;
-	
-	@NotBlank(message = "this field cannot be empty!")
-	@Size(min = 5, max = 50 , message = "username from 5 to 50 characters")
+
+	@NotBlank(message = "không được để trống!")
+	@Size(min = 5, max = 50, message = "tên đăng nhập từ 5 tới 50 kí tự")
 	@Column(name = "username", length = 45, nullable = false)
 	private String username;
-	
-	@NotBlank(message = "this field cannot be empty!")
-	@Size(min = 6, max = 60, message = "password must be greater than 6")
+
+	@NotBlank(message = "không được để trống!")
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Za-z])(?=\\S+$).{6,}$", message = "ít nhất 6 kí tự, có ít nhất một chữ số và một chữ cái")
 	@Column(name = "password", length = 60, nullable = false)
 	private String password;
-	
-	@NotBlank(message = "this field cannot be empty!")
-	@Email(message = "this is not an email")
+
+	@NotBlank(message = "không được để trống!")
+	@Email(message = "email không đúng định dạng")
 	@Column(name = "email", length = 45, nullable = false)
 	private String email;
 
 	@Column(name = "name", length = 100, nullable = true)
 	private String name;
-	
-	@Size(min = 5 , max = 13 , message = "PhoneNumber's invalid")
+
+	@Size(min = 5, max = 13, message = "số điện thoại không đúng định dạng")
 	@Column(name = "phone", length = 15, nullable = true)
 	private String phone;
 

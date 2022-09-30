@@ -1,11 +1,10 @@
 package com.luxuryshop.controller.admin;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
-
+import com.luxuryshop.entities.Role;
+import com.luxuryshop.entities.User;
+import com.luxuryshop.repositories.RoleRepository;
+import com.luxuryshop.repositories.UserRepository;
+import com.luxuryshop.solve_exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,11 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luxuryshop.solve_exception.CustomException;
-import com.luxuryshop.entities.Role;
-import com.luxuryshop.entities.User;
-import com.luxuryshop.repositories.RoleRepository;
-import com.luxuryshop.repositories.UserRepository;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Controller
 public class AdminManageAdminController {
@@ -70,12 +68,14 @@ public class AdminManageAdminController {
 	@Transactional
 	@RequestMapping(value = { "/delete-admin/{id}" }, method = RequestMethod.GET)
 	public String delete(@PathVariable Integer id, final ModelMap model, final HttpServletRequest request,
-			final HttpServletResponse Response) throws Exception {
+						 final HttpServletResponse Response) throws Exception {
 		try {
-			Role role = roleRepository.findByName("ROLE_TESTADMIN");
+			Role role = roleRepository.findByName("ROLE_MEMBER");
+			Role roleAdmin = roleRepository.findByName("ROLE_TESTADMIN");
 			User user = userRepository.getById(id);
 			List<Role> roles = user.getRoles();
-			roles.remove(role);
+			roles.add(role);
+			roles.remove(roleAdmin);
 			return "redirect:/admin/decentralization";
 		} catch(Exception e) {
 			e.printStackTrace();
