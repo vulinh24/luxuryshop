@@ -30,10 +30,10 @@
                         </div>
                         <ul>
                             <li>
-                                <h4>Cảm ơn bạn đã ghé thăm!</h4>
-                                <h4>Đây là trang web ảo</h4>
-                                <p>Vui lòng truy cập <a href="https://nhadep.com.vn/">tại đây</a> để mua hàng </p>
-                                <p>Đọc bài viết <a href="https://kfa.vn/">tại đây</a></p>
+                                <h3>Cảm ơn bạn đã ghé thăm!</h3>
+<%--                                <h4>Đây là trang web ảo</h4>--%>
+<%--                                <p>Vui lòng truy cập <a href="https://nhadep.com.vn/">tại đây</a> để mua hàng </p>--%>
+<%--                                <p>Đọc bài viết <a href="https://kfa.vn/">tại đây</a></p>--%>
                             </li>
                         </ul>
                     </div>

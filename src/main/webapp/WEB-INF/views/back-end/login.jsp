@@ -39,7 +39,6 @@
 			</div>
 			<div class="social-icon">
 				<a href="#"><img src="${pageContext.request.contextPath}/images/fb.png"></a>
-				<a href="#"><img src="${pageContext.request.contextPath}/images/tt.png"></a>
 				<a href="#"><img src="${pageContext.request.contextPath}/images/gg.png"></a>
 			</div>
 			<form id="login" class="input-group" action="/action-form-login" method="POST">
@@ -49,8 +48,10 @@
 							</div>
 						</c:if>
 				<input type="text" class="input-field" placeholder="Tên đăng nhập" required name="username">
-				<input type="password" class="input-field" placeholder="Mật khẩu" required name="password">
-				<input type="checkbox" name="remember-me" class="check-box"><span>Nhớ tài khoản, mật khẩu</span>
+				<div>
+					<input type="password" class="input-field" placeholder="Mật khẩu" required name="password">
+					<input type="checkbox" name="remember-me" class="check-box"><span style="position: absolute;bottom: 148px;left: 26px;">Nhớ tài khoản, mật khẩu</span>
+				</div>
 				<button class="submit-btn" type="submit">Đăng nhập</button>
 				
 			</form>
@@ -63,7 +64,9 @@
 				<form:input id="passwordr" type="password" class="input-field" required="required" placeholder="Mật khẩu" path="password"/>
                 <form:errors style="position:sticky;" path="password" cssClass="errorreg"></form:errors>
                 <input id="confirm_passwordr" type="password" class="input-field" placeholder="Nhập lại mật khẩu" required name="password-again">
-				<input type="checkbox" class="check-box" checked ><span>Tôi chấp nhận những điều khoản trên.</span>
+				<div>
+					<input type="checkbox" class="check-box" checked ><span>Tôi chấp nhận những điều khoản trên.</span>
+				</div>
 				<button type="submit" class="submit-btn">Đăng kí</button>
 			</form:form>
             <div class="cancel">
@@ -122,11 +125,11 @@
         }
     </script>
    
-    <c:if test="${user.username != null || user.username != ''}">
-			<script type="text/javascript">
-				register();
-			</script>
-	</c:if>
+<%--    <c:if test="${user.username != null || user.username != ''}">--%>
+<%--			<script type="text/javascript">--%>
+<%--				register();--%>
+<%--			</script>--%>
+<%--	</c:if>--%>
 	
 </body>
 </html>

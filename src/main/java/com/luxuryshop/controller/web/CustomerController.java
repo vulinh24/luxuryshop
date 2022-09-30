@@ -16,13 +16,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luxuryshop.SolveException.CustomException;
+import com.luxuryshop.solve_exception.CustomException;
 import com.luxuryshop.entities.DetailOrder;
 import com.luxuryshop.entities.User;
 import com.luxuryshop.repositories.DetailOrderRepository;

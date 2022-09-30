@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.luxuryshop.Utils.SendMailService;
+import com.luxuryshop.utils.SendMailService;
 import com.luxuryshop.entities.NotificationEmail;
 import com.luxuryshop.repositories.EmailRepository;
 

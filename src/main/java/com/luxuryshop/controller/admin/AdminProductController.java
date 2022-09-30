@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.luxuryshop.WebConstants;
-import com.luxuryshop.SolveException.CustomException;
+import com.luxuryshop.solve_exception.CustomException;
 import com.luxuryshop.entities.Product;
 import com.luxuryshop.entities.ProductImages;
 import com.luxuryshop.repositories.CategoryRepository;
