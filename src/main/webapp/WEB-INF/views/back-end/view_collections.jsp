@@ -41,7 +41,7 @@
                 <div class="right">
                     <div class="right__content">
                         <div class="right__title">Bảng điều khiển</div>
-                        <p class="right__desc">Xem bộ sưu t <a href="${pageContext.request.contextPath }/admin/collection-add"><button type="button" class="add btn-outline-dark">Thêm danh mục</button></a></p>
+                        <p class="right__desc">Xem bộ sưu tập <a href="${pageContext.request.contextPath }/admin/collection-add"><button type="button" class="add btn-outline-dark">Thêm danh mục</button></a></p>
                    
                         <div class="right__table">
                             <div class="right__tableWrapper">

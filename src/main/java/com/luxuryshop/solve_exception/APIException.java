@@ -1,4 +1,4 @@
-package com.luxuryshop.SolveException;
+package com.luxuryshop.solve_exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

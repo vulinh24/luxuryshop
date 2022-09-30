@@ -1,4 +1,4 @@
-package com.luxuryshop.Utils;
+package com.luxuryshop.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

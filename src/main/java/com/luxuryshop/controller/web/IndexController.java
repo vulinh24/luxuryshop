@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luxuryshop.SolveException.CustomException;
+import com.luxuryshop.solve_exception.CustomException;
 import com.luxuryshop.entities.Cart;
 import com.luxuryshop.entities.Collection;
 import com.luxuryshop.repositories.BannerRepository;

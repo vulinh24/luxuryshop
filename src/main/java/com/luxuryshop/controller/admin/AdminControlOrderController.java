@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.luxuryshop.SolveException.CustomException;
+import com.luxuryshop.solve_exception.CustomException;
 import com.luxuryshop.entities.DetailOrder;
 import com.luxuryshop.repositories.DetailOrderRepository;
 import com.luxuryshop.repositories.ProductRepository;

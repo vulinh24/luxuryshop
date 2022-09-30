@@ -1,4 +1,4 @@
-package com.luxuryshop.SolveException;
+package com.luxuryshop.solve_exception;
 
 
 public class CustomException extends RuntimeException{

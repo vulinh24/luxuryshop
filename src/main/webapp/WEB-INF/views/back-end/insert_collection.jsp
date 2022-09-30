@@ -21,7 +21,7 @@
                 <div class="right">
                     <div class="right__content">
                         <div class="right__title">Bảng điều khiển</div>
-                        <p class="right__desc">Chèn danh mục</p>
+                        <p class="right__desc">Chèn bộ sưu tập</p>
                         <div class="right__formWrapper">
                             <form:form action="${pageContext.request.contextPath}/admin/collection-add?type=update" method="post" modelAttribute="collection">
                             	<form:hidden path="id"/>

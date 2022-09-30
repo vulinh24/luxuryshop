@@ -9,7 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luxuryshop.SolveException.CustomException;
+import com.luxuryshop.solve_exception.CustomException;
 import com.luxuryshop.repositories.BlogRepository;
 
 @Controller

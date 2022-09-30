@@ -36,3 +36,11 @@
 - comment : use plugin facebook
 - control admin :done
 - admin collection : done
+
+** 2022
+- fix bug login
+- redis / kafka
+- num product
+- refactor db
+- login fb/gg
+- search with api

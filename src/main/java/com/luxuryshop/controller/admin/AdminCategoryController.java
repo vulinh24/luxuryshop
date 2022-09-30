@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.github.slugify.Slugify;
-import com.luxuryshop.SolveException.CustomException;
+import com.luxuryshop.solve_exception.CustomException;
 import com.luxuryshop.entities.Category;
 import com.luxuryshop.entities.User;
 import com.luxuryshop.repositories.CategoryRepository;

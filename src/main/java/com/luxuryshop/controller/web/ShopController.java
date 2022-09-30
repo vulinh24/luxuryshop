@@ -27,7 +27,7 @@ import com.luxuryshop.repositories.UserRepository;
 import com.luxuryshop.services.MyUserDetail;
 import com.luxuryshop.services.ProductService;
 import com.luxuryshop.services.WebService;
-import com.luxuryshop.SolveException.CustomException;
+import com.luxuryshop.solve_exception.CustomException;
 import com.luxuryshop.entities.Cart;
 import com.luxuryshop.entities.Category;
 import com.luxuryshop.entities.Product;

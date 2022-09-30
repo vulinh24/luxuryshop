@@ -20,7 +20,7 @@
                 <div class="right">
                     <div class="right__content">
                         <div class="right__title">Bảng điều khiển</div>
-                        <p class="right__desc">Xem sản phẩm</p>
+                        <p class="right__desc">Xem khách hàng</p>
                         <div class="right__table">
                             <div class="right__tableWrapper">
                                 <table id="myTable">

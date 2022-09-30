@@ -1,4 +1,4 @@
-package com.luxuryshop.APIs;
+package com.luxuryshop.apis;
 
 import java.util.List;
 import java.util.Optional;
