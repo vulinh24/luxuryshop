@@ -14,14 +14,14 @@ body{
 }
 
 .form-box{
-	width: 400px;
-	height: 600px;
-	position: relative;
-	margin: 6% auto;
-	background: #fff;
-	padding: 5px;
-	border-radius: 30px;
-	overflow: hidden;
+    width: 400px;
+    height: 680px;
+    position: relative;
+    margin: 6% auto;
+    background: #fff;
+    padding: 5px;
+    border-radius: 30px;
+    overflow: hidden;
 }
 
 .button-box{

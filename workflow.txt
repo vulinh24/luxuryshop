@@ -40,8 +40,8 @@
 ** 2022
 - fix bug login : done
 - redis / kafka
-- num product
-- refactor db
+- num product : done - but not validate amount
+- refactor db : done
 - login fb/gg
 - search with api
 - send mail confirm detailOrder

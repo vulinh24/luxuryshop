@@ -1,31 +1,23 @@
 package com.luxuryshop.entities;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luxuryshop.entities.primarykey.PKOfCart;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tbl_rate_product")
+@Table(name = "rate_product")
 public class RateProduct implements Serializable {
 
-	/**
-	 * 
+    /**
+     *
 	 */
 	private static final long serialVersionUID = 8705928410389589562L;
 

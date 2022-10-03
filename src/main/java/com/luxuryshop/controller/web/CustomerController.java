@@ -1,13 +1,11 @@
 package com.luxuryshop.controller.web;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-
+import com.luxuryshop.entities.Order;
+import com.luxuryshop.entities.User;
+import com.luxuryshop.repositories.DetailOrderRepository;
+import com.luxuryshop.repositories.UserRepository;
+import com.luxuryshop.services.MyUserDetail;
+import com.luxuryshop.solve_exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -21,12 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luxuryshop.solve_exception.CustomException;
-import com.luxuryshop.entities.DetailOrder;
-import com.luxuryshop.entities.User;
-import com.luxuryshop.repositories.DetailOrderRepository;
-import com.luxuryshop.repositories.UserRepository;
-import com.luxuryshop.services.MyUserDetail;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class CustomerController {
@@ -143,15 +141,15 @@ public class CustomerController {
 	public String indexMyOrder(final ModelMap model, final HttpServletRequest request, final HttpServletResponse Response ) 
 		throws Exception {
 		try {
-			MyUserDetail userDetail = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			User user = userDetail.getUser();
-			if (user == null) throw new CustomException();
-			Sort sort = Sort.by(Direction.DESC,"createdDate");
-			List<DetailOrder> orders = orderRepository.findByUser(user, sort);
-			model.addAttribute("user",user);
-			model.addAttribute("orders",orders);
-			return "back-end/customer/view_orders";
-		} catch (Exception e) {
+            MyUserDetail userDetail = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = userDetail.getUser();
+            if (user == null) throw new CustomException();
+            Sort sort = Sort.by(Direction.DESC, "createdDate");
+            List<Order> orders = orderRepository.findByUser(user, sort);
+            model.addAttribute("user", user);
+            model.addAttribute("orders", orders);
+            return "back-end/customer/view_orders";
+        } catch (Exception e) {
 			e.printStackTrace();
 			throw new CustomException();
 		}

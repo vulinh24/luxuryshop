@@ -1,11 +1,13 @@
 package com.luxuryshop.controller.admin;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luxuryshop.entities.Order;
+import com.luxuryshop.entities.OrderProduct;
+import com.luxuryshop.entities.Product;
+import com.luxuryshop.repositories.DetailOrderRepository;
+import com.luxuryshop.repositories.ProductRepository;
+import com.luxuryshop.repositories.UserRepository;
+import com.luxuryshop.solve_exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -16,12 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.luxuryshop.solve_exception.CustomException;
-import com.luxuryshop.entities.DetailOrder;
-import com.luxuryshop.repositories.DetailOrderRepository;
-import com.luxuryshop.repositories.ProductRepository;
-import com.luxuryshop.repositories.UserRepository;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class AdminControlOrderController {
@@ -39,7 +40,7 @@ public class AdminControlOrderController {
 			throws Exception {
 		try {
 			Sort sort = Sort.by(Direction.DESC, "createdDate");
-			List<DetailOrder> orders = orderRepository.findAll(sort);
+			List<Order> orders = orderRepository.findAll(sort);
 			model.addAttribute("orders", orders);
 			return "back-end/view_orders";
 		} catch (Exception e) {
@@ -49,11 +50,17 @@ public class AdminControlOrderController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = { "/admin/is-cancel" }, method = RequestMethod.POST)
+	@RequestMapping(value = {"/admin/is-cancel"}, method = RequestMethod.POST)
 	public void cancel(final ModelMap model, final HttpServletRequest request, final HttpServletResponse response,
-			@RequestBody DetailOrder data) throws Exception {
+					   @RequestBody Order data) throws Exception {
 		ObjectMapper om = new ObjectMapper();
-		DetailOrder order = orderRepository.getById(data.getId());
+		Order order = orderRepository.getById(data.getId());
+		List<OrderProduct> soldProduct = order.getSaledOrder();
+		soldProduct.forEach(orderProduct -> {
+			Integer productId = orderProduct.getProductId();
+			Product prod = productRepository.getById(productId);
+			prod.setAmount(prod.getAmount() + orderProduct.getQuantity());
+		});
 		order.setUpdatedDate(LocalDateTime.now());
 		order.setIsCancel(true);
 		order.setStatus("Đã hủy");
@@ -64,11 +71,12 @@ public class AdminControlOrderController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = { "/admin/is-pay" }, method = RequestMethod.POST)
+	@RequestMapping(value = {"/admin/is-pay"}, method = RequestMethod.POST)
+	@Transactional
 	public void confirm(final ModelMap model, final HttpServletRequest request, final HttpServletResponse response,
-			@RequestBody DetailOrder data) throws Exception {
+						@RequestBody Order data) throws Exception {
 		ObjectMapper om = new ObjectMapper();
-		DetailOrder order = orderRepository.getById(data.getId());
+		Order order = orderRepository.getById(data.getId());
 		order.setUpdatedDate(LocalDateTime.now());
 		order.setStatus("Đang giao hàng");
 		orderRepository.save(order);

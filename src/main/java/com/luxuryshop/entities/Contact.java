@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 @Entity
-@Table(name = "tbl_contact")
+@Table(name = "contact")
 public class Contact extends ParentEntity{
 
 	@Column(name = "name", length = 100, nullable = false)

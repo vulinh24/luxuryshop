@@ -36,56 +36,67 @@
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="container">
-            <div class="dashboard">
-                <jsp:include page="/WEB-INF/views/back-end/common/menu.jsp"></jsp:include>
-                <div class="right">
-                    <div class="right__content">
-                        <div class="right__title">Bảng điều khiển</div>
-                        <p class="right__desc">Xem sản phẩm: <a href="${pageContext.request.contextPath }/admin/product-add"><button type="button" class="add btn-outline-dark">Thêm sản phẩm</button></a></p>
-                        <div class="right__table">
-                            <div class="right__tableWrapper">
-                                <table id="myTable" style="border:none;">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">STT</th>
-                                            <th scope="col">Tên sản phẩm</th>
-                                            <th scope="col">Giá bán</th>
-                                            <th scope="col">Giá Cũ</th>
-                                            <th scope="col">Đã bán</th>
-                                            <th scope="col">Thời gian</th>
-                                            <th scope="col">Sửa</th>
-                                            <th scope="col">Xoá</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="product" items="${products }" varStatus="loop">
-	                                        <tr>
-	                                            <td data-label="STT" scope="row">${loop.index + 1}</td>
-	                                            <td data-label="Tên sản phẩm">${product.title }</td>
-	                                            <td data-label="Giá SP"><fmt:formatNumber value="${product.price }" type="number"/></td>
-	                                            <td data-label="Giá Sale"><fmt:formatNumber value="${product.priceOld }" type="number"/></td>
-	                                            <td data-label="Đã bán">1</td>
-	                                            <td data-label="Thời gian">
-	                                            	<c:choose>
-	                                            		<c:when test="${product.createdDate == null }">
-	                                            			${product.updatedDate }
-	                                            		</c:when>
-	                                            		<c:otherwise>
-	                                            			${product.createdDate }
-	                                            		</c:otherwise>
-	                                            	</c:choose>
-	                                            	
-	                                            </td>
-	                                            <td data-label="Sửa" class="right__iconTable"><a href="${pageContext.request.contextPath }/admin/product-add/${product.id}"><img src="${pageContext.request.contextPath }/assets/icon-edit.svg" alt=""></a></td>
-	                                            <td data-label="Xoá" class="right__iconTable"><a href="javascript:void(0)" onclick="myFunction(${product.id})"><img src="${pageContext.request.contextPath }/assets/icon-trash-black.svg" alt=""></a></td>
-                                        	</tr>
-                                        </c:forEach>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
+<div class="wrapper">
+    <div class="container">
+        <div class="dashboard">
+            <jsp:include page="/WEB-INF/views/back-end/common/menu.jsp"></jsp:include>
+            <div class="right">
+                <div class="right__content">
+                    <div class="right__title">Bảng điều khiển</div>
+                    <p class="right__desc">Xem sản phẩm: <a
+                            href="${pageContext.request.contextPath }/admin/product-add">
+                        <button type="button" class="add btn-outline-dark">Thêm sản phẩm</button>
+                    </a></p>
+                    <div class="right__table">
+                        <div class="right__tableWrapper">
+                            <table id="myTable" style="border:none;">
+                                <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Giá bán</th>
+                                    <th scope="col">Giá Cũ</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Thời gian</th>
+                                    <th scope="col">Sửa</th>
+                                    <th scope="col">Xoá</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="product" items="${products }" varStatus="loop">
+                                    <tr>
+                                        <td data-label="STT" scope="row">${loop.index + 1}</td>
+                                        <td data-label="Tên sản phẩm">${product.title }</td>
+                                        <td data-label="Giá SP"><fmt:formatNumber value="${product.price }"
+                                                                                  type="number"/></td>
+                                        <td data-label="Giá Sale"><fmt:formatNumber value="${product.priceOld }"
+                                                                                    type="number"/></td>
+                                        <td data-label="Số lượng">${product.amount}</td>
+                                        <td data-label="Thời gian">
+                                            <c:choose>
+                                                <c:when test="${product.createdDate == null }">
+                                                    ${product.updatedDate }
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${product.createdDate }
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                        </td>
+                                        <td data-label="Sửa" class="right__iconTable"><a
+                                                href="${pageContext.request.contextPath }/admin/product-add/${product.id}"><img
+                                                src="${pageContext.request.contextPath }/assets/icon-edit.svg"
+                                                alt=""></a></td>
+                                        <td data-label="Xoá" class="right__iconTable"><a href="javascript:void(0)"
+                                                                                         onclick="myFunction(${product.id})"><img
+                                                src="${pageContext.request.contextPath }/assets/icon-trash-black.svg"
+                                                alt=""></a></td>
+                                    </tr>
+                                </c:forEach>
+
+                                </tbody>
+                            </table>
+                        </div>
                         </div>
                     </div>
                 </div>

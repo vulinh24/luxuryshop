@@ -1,18 +1,9 @@
 package com.luxuryshop.controller.web;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
-
+import com.luxuryshop.entities.*;
+import com.luxuryshop.repositories.*;
+import com.luxuryshop.services.MyUserDetail;
+import com.luxuryshop.solve_exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,19 +13,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luxuryshop.solve_exception.CustomException;
-import com.luxuryshop.entities.Cart;
-import com.luxuryshop.entities.DetailOrder;
-import com.luxuryshop.entities.Product;
-import com.luxuryshop.entities.SaledProduct;
-import com.luxuryshop.entities.User;
-import com.luxuryshop.repositories.CartRepository;
-import com.luxuryshop.repositories.DetailOrderRepository;
-import com.luxuryshop.repositories.DiscountRepository;
-import com.luxuryshop.repositories.ProductRepository;
-import com.luxuryshop.repositories.ProductsOrderRepository;
-import com.luxuryshop.repositories.UserRepository;
-import com.luxuryshop.services.MyUserDetail;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class CheckoutController {
@@ -85,7 +74,7 @@ public class CheckoutController {
 				model.addAttribute("total",total);
 				model.addAttribute("CART",carts);
 				model.addAttribute("cate", "shop");
-				model.addAttribute("detailOrder", new DetailOrder());
+				model.addAttribute("detailOrder", new Order());
 				return "front-end/checkout";
 			} else {
 				List<Cart> carts = new ArrayList<>();
@@ -110,7 +99,7 @@ public class CheckoutController {
 				model.addAttribute("total",total);
 				model.addAttribute("CART",carts);
 				model.addAttribute("cate", "shop");
-				model.addAttribute("detailOrder", new DetailOrder());
+				model.addAttribute("detailOrder", new Order());
 				return "front-end/checkout";
 			}
 		} catch (Exception e) {
@@ -118,11 +107,11 @@ public class CheckoutController {
 			throw new CustomException();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional
-	@RequestMapping(value = { "/save-cart" }, method = RequestMethod.POST)
-	public String save(@ModelAttribute(name = "detailOrder") DetailOrder detailOrder,final ModelMap model, final HttpServletRequest request, final HttpServletResponse response)
+	@RequestMapping(value = {"/save-cart"}, method = RequestMethod.POST)
+	public String save(@ModelAttribute(name = "detailOrder") Order detailOrder, final ModelMap model, final HttpServletRequest request, final HttpServletResponse response)
 			throws Exception {
 		try {
 			HttpSession session = request.getSession();
@@ -151,9 +140,10 @@ public class CheckoutController {
 				detailOrder.setCreatedDate(LocalDateTime.now());
 				detailOrder = detailRepository.save(detailOrder);
 				// save product in order
-				List<SaledProduct> saledProducts = new ArrayList<>();
+				List<OrderProduct> saledProducts = new ArrayList<>();
 				for (Cart cart : carts) {
-					SaledProduct p = new SaledProduct();
+					OrderProduct p = new OrderProduct();
+					p.setProductId(cart.getProductCart().getId());
 					p.setSelledDate(Date.valueOf(LocalDate.now()));
 					p.setProductTitle(cart.getProductCart().getTitle());
 					float price = cart.getProductCart().getPrice();
@@ -161,6 +151,7 @@ public class CheckoutController {
 					p.setQuantity(cart.getQuantity());
 					p.setOrder(detailOrder);
 					saledProducts.add(p);
+					cart.getProductCart().setAmount(cart.getProductCart().getAmount() - cart.getQuantity());
 				}
 				proOrderRepository.saveAll(saledProducts);
 				// xoá giỏ hàng đi
@@ -202,9 +193,10 @@ public class CheckoutController {
 				detailOrder.setCreatedDate(LocalDateTime.now());
 				detailOrder = detailRepository.save(detailOrder);
 				// save product in order
-				List<SaledProduct> saledProducts = new ArrayList<>();
+				List<OrderProduct> saledProducts = new ArrayList<>();
 				for (Cart cart : carts) {
-					SaledProduct p = new SaledProduct();
+					OrderProduct p = new OrderProduct();
+					p.setProductId(cart.getProductCart().getId());
 					p.setSelledDate(Date.valueOf(LocalDate.now()));
 					p.setProductTitle(cart.getProductCart().getTitle());
 					float price = cart.getProductCart().getPrice();
@@ -212,6 +204,7 @@ public class CheckoutController {
 					p.setQuantity(cart.getQuantity());
 					p.setOrder(detailOrder);
 					saledProducts.add(p);
+					cart.getProductCart().setAmount(cart.getProductCart().getAmount() - cart.getQuantity());
 				}
 				proOrderRepository.saveAll(saledProducts);
 				// xoá giỏ hàng đi

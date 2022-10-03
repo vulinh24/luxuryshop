@@ -1,30 +1,18 @@
 package com.luxuryshop.entities;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("serial")
 @Data
@@ -32,17 +20,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table (name = "tbl_products")
-public class Product extends ParentEntity implements Serializable, Comparable<Product>{
-	
-	@Column(name = "title", length = 500, nullable = false)
-	private String title;
+@Table(name = "product")
+public class Product extends ParentEntity implements Serializable, Comparable<Product> {
 
-	@Column(name = "price", nullable = false)
-	private float price;
+    @Column(name = "title", length = 500, nullable = false)
+    private String title;
 
-	@Column(name = "price_old", nullable = false)
-	private float priceOld;
+    @Column(name = "price", nullable = false)
+    private float price;
+
+    @Column(name = "price_old", nullable = false)
+    private float priceOld;
 	
 	@Column(name = "short_description", nullable = true, columnDefinition = "TEXT")
 	private String shortDescription;
@@ -56,26 +44,29 @@ public class Product extends ParentEntity implements Serializable, Comparable<Pr
 	private String seo;
 
 	@Column(name = "ishot", nullable = true)
-	private Boolean isHot;
+    private Boolean isHot;
 
-	@Column(name = "isnew", nullable = true)
-	private Boolean isNew;
+    @Column(name = "isnew", nullable = true)
+    private Boolean isNew;
 
-	@Column(name = "issale", nullable = true)
-	private Boolean isSale;
-	
-	@Column(name = "rate", columnDefinition = "integer default 5")
-	private Integer rate;
-	
-	// get only specific property in relation: many-to-one or one-to-many ,...
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
-	@ManyToOne
-	@JoinColumn (name = "category_id" , nullable = true )
-	private Category category;
-	
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "path")
-	@JsonIdentityReference(alwaysAsId = true)
+    @Column(name = "issale", nullable = true)
+    private Boolean isSale;
+
+    @Column(name = "rate", columnDefinition = "integer default 5")
+    private Integer rate;
+
+    @Column(name = "amount", columnDefinition = "integer default 0")
+    private Integer amount;
+
+    // get only specific property in relation: many-to-one or one-to-many ,...
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = true)
+    private Category category;
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "path")
+    @JsonIdentityReference(alwaysAsId = true)
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<ProductImages> productImages = new ArrayList<>();
 	

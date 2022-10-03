@@ -1,44 +1,37 @@
 package com.luxuryshop.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_product_detail")
+@Table(name = "product_detail")
 public class ProductDetail {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name = "dimension",nullable = true)
+
+    @Column(name = "dimension",nullable = true)
 	private String dimension;
-	
-	@Column(name = "origin")
+
+    @Column(name = "origin")
 	private String origin;
-	
-	@Column(name = "material")
+
+    @Column(name = "material")
 	private String material;
-	
-	@Column(name = "insurance")
+
+    @Column(name = "insurance")
 	private String insurance;
-	
-	@JsonIgnore
+
+    @JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "product_id" , referencedColumnName = "id")
 	private Product product;

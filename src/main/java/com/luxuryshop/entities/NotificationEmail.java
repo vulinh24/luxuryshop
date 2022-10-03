@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_mail_register")
+@Table(name = "mail_register")
 public class NotificationEmail extends ParentEntity {
 
 

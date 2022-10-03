@@ -2,9 +2,9 @@ package com.luxuryshop;
 
 public class WebConstants {
 	/*
-	 * số sản phẩm hiện trên một trang
-	 */
-	public static final int NUM_OF_PRODUCTS = 12;
+     * số sản phẩm hiện trên một trang
+     */
+    public static final int NUM_OF_PRODUCTS = 9;
 	
 	/*
 	 * tên session thực hiện công cụ tìm kiếm 

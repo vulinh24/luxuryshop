@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_users")
+@Table(name = "user")
 public class User extends ParentEntity implements Serializable {
 
 	/**
@@ -55,28 +55,28 @@ public class User extends ParentEntity implements Serializable {
 	private String address;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tbl_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	List<Role> roles;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Cart> carts;
 
 	@OneToMany(mappedBy = "user")
-	List<DetailOrder> detailOrder;
-	
-	@ManyToMany(fetch = FetchType.LAZY) 
-	@JoinTable(name = "tbl_favorite_products", 
-				joinColumns = @JoinColumn(name = "user_id"),
-				inverseJoinColumns = @JoinColumn(name="product_id"))
+	List<Order> detailOrder;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "favorite_product",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "product_id"))
 	List<Product> fProducts; // focus
-	
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	List<RateProduct> rates; //focus
-	
+
 	@PreRemove
 	void deletefk() {
-		List<DetailOrder> deleOrder = this.getDetailOrder();
-		for (DetailOrder o : deleOrder) {
+		List<Order> deleOrder = this.getDetailOrder();
+		for (Order o : deleOrder) {
 			o.setUser(null);
 		}
 	}

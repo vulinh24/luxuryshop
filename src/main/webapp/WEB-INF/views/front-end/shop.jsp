@@ -103,42 +103,48 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseOne">Bộ sưu tập
-                                        <img src="${pageContext.request.contextPath}/images/arrow-down.png"></a>
-                                    </div>
-                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__categories">
-                                                <ul class="nice-scroll">
-                                                	<li><a href="${pageContext.request.contextPath}/shop/search?collectionid=-1&page=1" <c:if test="${empty currentCollectionId }">class="active"</c:if> >Bỏ lọc</a></li>
-	                                                <c:forEach var = "collection" items = "${collections }">
-														<li><a href="${pageContext.request.contextPath}/shop/search?collectionid=${collection.id}&page=1" class="${currentCollectionId==collection.id ? 'active' : '' }"> ${collection.name }</li>
-													</c:forEach>
-												</ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseSix">Thẻ
-                                        <img src="${pageContext.request.contextPath}/images/arrow-down.png"></a>
-                                    </div>
-                                    <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__tags">
-                                            	<c:forEach var="tag" items="${tags}">
-                                            		<a href="${pageContext.request.contextPath}/shop/search?tag=${tag.upperName()}">${tag.upperName()}</a>
-                                            	</c:forEach>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </c:if>
+									<div class="card">
+										<div class="card-heading">
+											<a data-toggle="collapse" data-target="#collapseOne">Bộ sưu tập
+												<img src="${pageContext.request.contextPath}/images/arrow-down.png"></a>
+										</div>
+										<div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+											<div class="card-body">
+												<div class="shop__sidebar__categories">
+													<ul class="nice-scroll">
+														<li>
+															<a href="${pageContext.request.contextPath}/shop/search?collectionid=-1&page=1"
+															   <c:if test="${empty currentCollectionId }">class="active"</c:if> >Bỏ
+																lọc</a></li>
+														<c:forEach var="collection" items="${collections }">
+															<li>
+																<a href="${pageContext.request.contextPath}/shop/search?collectionid=${collection.id}&page=1"
+																   class="${currentCollectionId==collection.id ? 'active' : '' }"> ${collection.name }
+															</li>
+														</c:forEach>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<%--                                <div class="card">--%>
+									<%--                                    <div class="card-heading">--%>
+									<%--                                        <a data-toggle="collapse" data-target="#collapseSix">Thẻ--%>
+									<%--                                        <img src="${pageContext.request.contextPath}/images/arrow-down.png"></a>--%>
+									<%--                                    </div>--%>
+									<%--                                    <div id="collapseSix" class="collapse show" data-parent="#accordionExample">--%>
+									<%--                                        <div class="card-body">--%>
+									<%--                                            <div class="shop__sidebar__tags">--%>
+									<%--                                            	<c:forEach var="tag" items="${tags}">--%>
+									<%--                                            		<a href="${pageContext.request.contextPath}/shop/search?tag=${tag.upperName()}">${tag.upperName()}</a>--%>
+									<%--                                            	</c:forEach>--%>
+									<%--                                            </div>--%>
+									<%--                                        </div>--%>
+									<%--                                    </div>--%>
+									<%--                                </div>--%>
+								</c:if>
                                 
                             </div>
                         </div>
@@ -208,45 +214,70 @@
 												<c:if test="${product.isSale == true }">
 													<span class="label">Sale</span>
 												</c:if>
-											<ul class="product__hover">
-				                                <c:choose>
+												<ul class="product__hover">
+													<c:choose>
 														<c:when test="${product.userLiked(USER) == true }">
-															<li onclick="favorite.favorite(${product.id});"><a><img class = "img_${product.id }" src="${pageContext.request.contextPath}/images/redheart.png" alt=""><span>Yêu thích</span></a></li>
+															<li onclick="favorite.favorite(${product.id});"><a><img
+																	class="img_${product.id }"
+																	src="${pageContext.request.contextPath}/images/redheart.png"
+																	alt=""><span>Yêu thích</span></a></li>
 														</c:when>
 														<c:otherwise>
-															<li onclick="favorite.favorite(${product.id});"><a><img class = "img_${product.id }" src="${pageContext.request.contextPath}/images/heart.png" alt=""><span>Yêu thích</span></a></li>
+															<li onclick="favorite.favorite(${product.id});"><a><img
+																	class="img_${product.id }"
+																	src="${pageContext.request.contextPath}/images/heart.png"
+																	alt=""><span>Yêu thích</span></a></li>
 														</c:otherwise>
 													</c:choose>
-				                                <li><a href="#"><img src="${pageContext.request.contextPath}/images/compare.png" alt=""><span>So sánh</span></a></li>
-				                                <li><a href="${pageContext.request.contextPath}/shop-details/${product.seo}"><img src="${pageContext.request.contextPath}/images/search.png" alt=""><span>Chi tiết</span></a></li>
-				                            </ul>
-				                        </div>
+													<li><a href="#"><img
+															src="${pageContext.request.contextPath}/images/compare.png"
+															alt=""><span>So sánh</span></a></li>
+													<li>
+														<a href="${pageContext.request.contextPath}/shop-details/${product.seo}"><img
+																src="${pageContext.request.contextPath}/images/search.png"
+																alt=""><span>Chi tiết</span></a></li>
+												</ul>
+											</div>
 										</c:otherwise>
 									</c:choose>
-			                        <div class="product__item__text">
-			                            <h6>${product.title }</h6>
-			                            <!-- code api in javascript.js -->
-			                            <a href="javascript:void(0)" class="add-cart" onclick="cart.choose_product_to_cart(${product.id}, 1)" >+ Thêm vào giỏ hàng</a>
-			                            
-			                            <div class="rating">
-			                                <c:forEach begin="1" end="${product.rate }">
-			                            		<img width="15px" src="${pageContext.request.contextPath}/images/yellow-star.png">
-			                            	</c:forEach>
-			                                <c:forEach begin="${product.rate + 1 }" end="5">
-			                            		<img width="15px" src="${pageContext.request.contextPath}/images/grey-star.png">
-			                            	</c:forEach>
-			                            </div>
-			                             <h5><fmt:formatNumber value="${product.price }" type="number"/> <span style="text-decoration:line-through; font-size:14px; color:grey;"><fmt:formatNumber value="${product.priceOld }" type="number"/></span></h5>
-			                            <div class="product__color__select">
-			                                <label class="silver" for="pc-1">
-			                                    <input type="radio" id="pc-1">
-			                                </label>
-			                                <label class="active grey" for="pc-2">
-			                                    <input type="radio" id="pc-2">
-			                                </label>
-			                            </div>
-			                        </div>
-			                    </div>
+									<div class="product__item__text">
+										<h6>${product.title }</h6>
+										<!-- code api in javascript.js -->
+										<c:choose>
+											<c:when test="${product.amount > 0}">
+												<a href="javascript:void(0)" class="add-cart"
+												   onclick="cart.choose_product_to_cart(${product.id}, 1)">+ Thêm vào
+													giỏ hàng <span style="float: right">SL: ${product.amount}</span></a>
+											</c:when>
+											<c:otherwise>
+												<a href="javascript:void(0)" class="add-cart">Sản phẩm hiện đã bán
+													hết!</a>
+											</c:otherwise>
+										</c:choose>
+
+										<div class="rating">
+											<c:forEach begin="1" end="${product.rate }">
+												<img width="15px"
+													 src="${pageContext.request.contextPath}/images/yellow-star.png">
+											</c:forEach>
+											<c:forEach begin="${product.rate + 1 }" end="5">
+												<img width="15px"
+													 src="${pageContext.request.contextPath}/images/grey-star.png">
+											</c:forEach>
+										</div>
+										<h5><fmt:formatNumber value="${product.price }" type="number"/> <span
+												style="text-decoration:line-through; font-size:14px; color:grey;"><fmt:formatNumber
+												value="${product.priceOld }" type="number"/></span></h5>
+										<div class="product__color__select">
+											<label class="silver" for="pc-1">
+												<input type="radio" id="pc-1">
+											</label>
+											<label class="active grey" for="pc-2">
+												<input type="radio" id="pc-2">
+											</label>
+										</div>
+									</div>
+								</div>
 			                 </div>
                         </c:forEach>
                     </div>

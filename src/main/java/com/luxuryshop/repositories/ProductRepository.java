@@ -1,15 +1,18 @@
 package com.luxuryshop.repositories;
 
-import java.util.List;
-
+import com.luxuryshop.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.luxuryshop.entities.Product;
+import java.util.List;
+
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer>{
-	public List<Product> findByIsHotTrue();
-	public List<Product> findByIsNewTrue();
-	public List<Product> findByIsSaleTrue();
-	public List<Product> findBySeo(String seo);
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+	List<Product> findByIsHotTrue();
+
+	List<Product> findByIsNewTrue();
+
+	List<Product> findByIsSaleTrue();
+
+	List<Product> findBySeo(String seo);
 }

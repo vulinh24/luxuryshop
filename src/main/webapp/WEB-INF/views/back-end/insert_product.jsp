@@ -105,30 +105,35 @@
                                 <form:hidden path="productDetail.id"/>
                                 <form:hidden path="productDetail.product.id"/>
                                 <div class="right__inputWrapper">
-									<label>Kích thước</label>
-									<form:input type="text" class="form-control" path="productDetail.dimension"/>
-								</div>
-								<div class="right__inputWrapper">
-									<label>Chất liệu</label>
-									<form:input type="text" class="form-control" path="productDetail.material"/>
-								</div>
-								<div class="right__inputWrapper">
-									<label>Xuất xứ</label>
-									<form:input type="text" class="form-control" path="productDetail.origin"/>
-								</div>
-								<div class="right__inputWrapper">
-									<label>Bảo hành</label>
-									<form:input type="text" class="form-control" path="productDetail.insurance"/>
-								</div>
-                                
+                                    <label>Kích thước</label>
+                                    <form:input type="text" class="form-control" path="productDetail.dimension"/>
+                                </div>
                                 <div class="right__inputWrapper">
-									<label>Đánh giá</label>
-									<form:input type="text" class="form-control" path="rate"/>
-								</div>
-                                
+                                    <label>Chất liệu</label>
+                                    <form:input type="text" class="form-control" path="productDetail.material"/>
+                                </div>
+                                <div class="right__inputWrapper">
+                                    <label>Xuất xứ</label>
+                                    <form:input type="text" class="form-control" path="productDetail.origin"/>
+                                </div>
+                                <div class="right__inputWrapper">
+                                    <label>Bảo hành</label>
+                                    <form:input type="text" class="form-control" path="productDetail.insurance"/>
+                                </div>
+
+                                <div class="right__inputWrapper">
+                                    <label>Đánh giá</label>
+                                    <form:input type="text" class="form-control" path="rate"/>
+                                </div>
+
+                                <div class="right__inputWrapper">
+                                    <label>Số lượng</label>
+                                    <form:input type="text" class="form-control" path="amount"/>
+                                </div>
+
                                 <button class="btn" type="submit">Thêm</button>
-                                
-                                
+
+
                             </form:form>
                         </div>
                     </div>

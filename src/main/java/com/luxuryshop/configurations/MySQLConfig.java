@@ -1,16 +1,17 @@
 package com.luxuryshop.configurations;
 
-import java.util.Properties;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
@@ -18,9 +19,9 @@ public class MySQLConfig {
 	@Bean(destroyMethod = "close")
 	protected DataSource dataSource() {
 		HikariConfig dataSourceConfig = new HikariConfig();
-		dataSourceConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSourceConfig.setJdbcUrl("jdbc:mysql://localhost:3306/luxuryshop?useUnicode=yes&characterEncoding=UTF-8");
-		dataSourceConfig.setUsername("root");
+        dataSourceConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSourceConfig.setJdbcUrl("jdbc:mysql://localhost:3306/luxuryshop2?useUnicode=yes&characterEncoding=UTF-8");
+        dataSourceConfig.setUsername("root");
 		return new HikariDataSource(dataSourceConfig);
 	}
 
