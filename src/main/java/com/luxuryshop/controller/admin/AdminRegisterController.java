@@ -1,11 +1,11 @@
 package com.luxuryshop.controller.admin;
 
-import java.time.LocalDateTime;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import com.luxuryshop.entities.RoleOfUser;
+import com.luxuryshop.entities.User;
+import com.luxuryshop.entities.primarykey.PKOfRoleUser;
+import com.luxuryshop.repositories.RoleUserRepository;
+import com.luxuryshop.repositories.UserRepository;
+import com.luxuryshop.solve_exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.luxuryshop.solve_exception.CustomException;
-import com.luxuryshop.entities.RoleOfUser;
-import com.luxuryshop.entities.User;
-import com.luxuryshop.entities.primarykey.PKOfRoleUser;
-import com.luxuryshop.repositories.RoleUserRepository;
-import com.luxuryshop.repositories.UserRepository;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @Controller
 public class AdminRegisterController {
@@ -48,7 +46,6 @@ public class AdminRegisterController {
 				if (user == null) {
 					if (userModel.getPassword().equals(password_again)) {
 						userModel.setCreatedDate(LocalDateTime.now());
-						userModel.setEnabled(true);
 						userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
 					} else {
 						model.addAttribute("notsimilar", true);

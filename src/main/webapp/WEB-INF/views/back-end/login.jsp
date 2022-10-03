@@ -39,8 +39,10 @@
 			<button class="toggle-btn" onclick="register()">Đăng kí</button>
 		</div>
 		<div class="social-icon">
-			<a href="#"><img src="${pageContext.request.contextPath}/images/fb.png"></a>
-			<a href="#"><img src="${pageContext.request.contextPath}/images/gg.png"></a>
+			<a href="https://www.facebook.com/dialog/oauth?client_id=5984266168268721&redirect_uri=http://localhost:8888/auth/facebook-login&scope=public_profile+email"><img
+					src="${pageContext.request.contextPath}/images/fb.png"></a>
+			<a href="https://accounts.google.com/o/oauth2/auth?scope=openid email profile&redirect_uri=http://localhost:8888/auth/google-login&response_type=code&client_id=652114865882-gr3tn964j0vhar926d74qsg7aoq5c25n.apps.googleusercontent.com&approval_prompt=force"><img
+					src="${pageContext.request.contextPath}/images/gg.png"></a>
 		</div>
 		<form id="login" class="input-group" action="/action-form-login" method="POST">
 			<c:if test="${not empty param.page_error}">

@@ -63,7 +63,7 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("ADMIN", "TESTADMIN")
                 .antMatchers("/api/v1/change/**")
                 .hasRole("ADMIN")
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/auth/**").permitAll()
                 //end edit
                 .and() // kết hợp với điều kiện.
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).authenticationEntryPoint(new CustomHttp403ForbiddenEntryPoint())

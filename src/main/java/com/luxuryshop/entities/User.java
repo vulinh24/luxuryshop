@@ -25,9 +25,6 @@ public class User extends ParentEntity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8688323980624037918L;
-	
-	@Column(name = "enabled", nullable = false)
-	private boolean enabled = Boolean.TRUE;
 
 	@NotBlank(message = "không được để trống!")
 	@Size(min = 5, max = 50, message = "tên đăng nhập từ 5 tới 50 kí tự")
@@ -36,7 +33,7 @@ public class User extends ParentEntity implements Serializable {
 
 	@NotBlank(message = "không được để trống!")
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Za-z])(?=\\S+$).{6,}$", message = "ít nhất 6 kí tự, có ít nhất một chữ số và một chữ cái")
-	@Column(name = "password", length = 60, nullable = false)
+    @Column(name = "password", length = 60, nullable = true)
 	private String password;
 
 	@NotBlank(message = "không được để trống!")

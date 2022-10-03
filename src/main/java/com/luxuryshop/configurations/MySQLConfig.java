@@ -20,8 +20,8 @@ public class MySQLConfig {
 	protected DataSource dataSource() {
 		HikariConfig dataSourceConfig = new HikariConfig();
         dataSourceConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceConfig.setJdbcUrl("jdbc:mysql://localhost:3306/luxuryshop2?useUnicode=yes&characterEncoding=UTF-8");
-        dataSourceConfig.setUsername("root");
+		dataSourceConfig.setJdbcUrl("jdbc:mysql://localhost:3306/luxuryshop?useUnicode=yes&characterEncoding=UTF-8");
+		dataSourceConfig.setUsername("root");
 		return new HikariDataSource(dataSourceConfig);
 	}
 

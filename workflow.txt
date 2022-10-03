@@ -42,7 +42,7 @@
 - redis / kafka
 - num product : done - but not validate amount
 - refactor db : done
-- login fb/gg
+- login fb/gg : done
 - search with api
 - send mail confirm detailOrder
 - new payment
