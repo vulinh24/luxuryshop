@@ -12,17 +12,85 @@
 <head>
     <title>Cửa hàng</title>
     <jsp:include page="/WEB-INF/views/front-end/common/css.jsp"></jsp:include>
-    <style>
-	    .shop__sidebar__categories .active{
-	    	color:black;
-	    }
-	    .shop__sidebar__price .active {
-	    	color :black;
-	    }
-    </style>
+	<style>
+		.shop__sidebar__categories .active {
+			color: black;
+		}
+
+		.shop__sidebar__price .active {
+			color: black;
+		}
+	</style>
+	<style>
+		.phppot-container {
+			-webkit-font-smoothing: antialiased;
+			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+			font-size: .9em;
+			color: #1e2a28;
+			width: 740px;
+			margin: 0 auto;
+			padding: 0px 20px 20px 20px;
+		}
+
+		.header-search {
+			padding: 40px;
+			max-width: 500px;
+			margin: 0 auto;
+		}
+
+		#search-list {
+			max-width: 500px;
+			border-bottom: #E0E0E0 1px solid;
+			border-left: #E0E0E0 1px solid;
+			border-right: #E0E0E0 1px solid;
+		}
+
+		#search-box {
+			padding: 20px;
+			border: #E0E0E0 1px solid;
+			border-radius: 0px;
+			width: 100%;
+		}
+
+		.search-section {
+			padding: 10px;
+			border-bottom: 1px solid #E0E0E0;
+		}
+
+		.product-row {
+			border-bottom: 2px;
+			clear: both;
+		}
+
+		.description {
+			line-height: 20px;
+			display: inline-block;
+			font-size: 14px;
+		}
+
+		.image-search-result {
+			height: 36px;
+			width: 36px;
+			padding: 0px 0px 0px 0px;
+			cursor: pointer;
+			border: #E0E0E0 1px solid;
+			margin-right: 10px;
+		}
+
+		#search-list {
+			overflow: scroll;
+			height: 300px;
+		}
+
+		#suggesstion-box {
+			position: absolute;
+			z-index: 10000;
+			background-color: white;
+		}
+	</style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/front-end/common/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/front-end/common/header.jsp"></jsp:include>
     <section class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -36,23 +104,24 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-     <section class="shop spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="shop__sidebar">
-                        <div class="shop__sidebar__search">
-                            <form action="/shop/search" method="post">
-                                <input type="text" placeholder="Tìm kiếm..." name="keyword">
-                                <button type="submit"><img src="${pageContext.request.contextPath}/images/search.png"></button>
-                            </form>
-                        </div>
-                        <div class="shop__sidebar__accordion">
-                            <div class="accordion" id="accordionExample">
-                            	<c:if test="${not empty USER }">
+			</div>
+		</div>
+	</section>
+<section class="shop spad">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="shop__sidebar">
+					<div class="shop__sidebar__search">
+						<form action="/shop/search" method="post">
+							<input id="search-box" type="text" placeholder="Tìm kiếm..." name="keyword">
+							<div id="suggesstion-box"></div>
+						</form>
+
+					</div>
+					<div class="shop__sidebar__accordion">
+						<div class="accordion" id="accordionExample">
+							<c:if test="${not empty USER }">
                                 		<div class="card">
                                 		<div class="card-heading" style="margin-bottom: 20px;">
                                         <a href="${pageContext.request.contextPath}/shop/search?favorite=true" >Sản phẩm yêu thích</a>
@@ -317,5 +386,34 @@
     <jsp:include page="/WEB-INF/views/front-end/common/footer.jsp"></jsp:include>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/page.js"></script>
     <jsp:include page="/WEB-INF/views/front-end/common/js.jsp"></jsp:include>
+
+
+<script>
+	$(document).ready(function () {
+		$("#search-box").keyup(function () {
+			$(".img-url").show();
+			$.ajax({
+				url: "/suggest-search",
+				type: "post",
+				crossDomain: true,
+				contentType: "application/json", // dữ liệu gửi lên web-service có dạng là json.
+				data: JSON.stringify('keyword=' + $(this).val()), // object json -> string json
+				dataType: "text", // dữ liệu từ web-service trả về là json.
+				success: function (resp) {
+					$("#suggesstion-box").show();
+					$("#suggesstion-box").html(resp);
+					$("#search-box").css("background", "#FFF");
+				}
+			});
+		});
+	});
+	// $(document).ready(function() {
+	// 	$("#search-box").blur(function() {
+	// 		$("#suggesstion-box").hide();
+	// 	});
+	// });
+	$.ajaxSetup({headers: {'csrftoken': '{{ csrf_token() }}'}});
+</script>
+
 </body>
 </html>

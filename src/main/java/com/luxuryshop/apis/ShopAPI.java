@@ -1,9 +1,7 @@
 package com.luxuryshop.apis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.luxuryshop.entities.Cart;
-import com.luxuryshop.entities.Discount;
-import com.luxuryshop.entities.User;
+import com.luxuryshop.entities.*;
 import com.luxuryshop.entities.primarykey.PKOfCart;
 import com.luxuryshop.model.CartModel;
 import com.luxuryshop.repositories.CartRepository;
@@ -25,11 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
-public class CartAPI {
+public class ShopAPI {
 
     @Autowired
     HttpServletRequest request;
@@ -185,5 +185,25 @@ public class CartAPI {
         if (check != null) {
             return String.valueOf(check.getDiscount());
         } else return "notfound";
+    }
+
+    @PostMapping("/suggest-search")
+    public String searchByKeyword(@RequestBody String keyword) {
+        List<Product> products = productRepository.findByIsHotTrue();
+        Map<Integer, ProductImages> map = products.stream()
+                .collect(Collectors.toMap(product -> product.getId(), product -> product.getProductImages().get(0)));
+        String resp = "<div id=\"search-list\">\n" +
+                "    <div class=\"search-section\">\n";
+        for (Product product : products) {
+            String format = "<div class=\"product-row\">\n" +
+                    "            <img class=\"image-search-result\" src=\"%s\">\n" +
+                    "            <div class=\"description\" ><p>%s</p> <p>%d</p></div>\n" +
+                    "        </div>";
+            String item = String.format(format, "/file/upload/" + map.get(product.getId()).getPath(), product.getTitle(), (int) product.getPrice());
+            resp = resp.concat(item);
+        }
+        resp = resp.concat("    </div>\n" +
+                "</div>");
+        return resp;
     }
 }
