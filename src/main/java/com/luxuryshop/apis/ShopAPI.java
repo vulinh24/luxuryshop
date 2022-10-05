@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -189,18 +190,29 @@ public class ShopAPI {
 
     @PostMapping("/suggest-search")
     public String searchByKeyword(@RequestBody String keyword) {
-        List<Product> products = productRepository.findByIsHotTrue();
+//        keyword = "%" + keyword + "%";
+        List<Product> products = productRepository.findByTitleContainingIgnoreCase(keyword);
         Map<Integer, ProductImages> map = products.stream()
                 .collect(Collectors.toMap(product -> product.getId(), product -> product.getProductImages().get(0)));
         String resp = "<div id=\"search-list\">\n" +
                 "    <div class=\"search-section\">\n";
-        for (Product product : products) {
-            String format = "<div class=\"product-row\">\n" +
-                    "            <img class=\"image-search-result\" src=\"%s\">\n" +
-                    "            <div class=\"description\" ><p>%s</p> <p>%d</p></div>\n" +
+        if (!products.isEmpty()) {
+            for (Product product : products) {
+                DecimalFormat df = new DecimalFormat("###,###,###");
+                String price = df.format(product.getPrice());
+                String format = "<div class=\"product-row\">\n" +
+                        "<a href=\"%s\" class=\"detail\">" +
+                        "            <img class=\"image-search-result\" src=\"%s\">\n" +
+                        "            <div class=\"description\" ><span class=\"desc\">%s</span><br /><span class=\"price\">%s</span></div>\n" +
+                        "        </div></a>";
+                String item = String.format(format, "/shop-details/" + product.getSeo(), "/file/upload/" + map.get(product.getId()).getPath(), product.getTitle(), price);
+                resp = resp.concat(item);
+            }
+        } else {
+            String s = "<div class=\"product-row\">\n" +
+                    "            <div class=\"description\" >Không tìm thấy sản phẩm phù hơp!</div>\n" +
                     "        </div>";
-            String item = String.format(format, "/file/upload/" + map.get(product.getId()).getPath(), product.getTitle(), (int) product.getPrice());
-            resp = resp.concat(item);
+            resp = resp.concat(s);
         }
         resp = resp.concat("    </div>\n" +
                 "</div>");

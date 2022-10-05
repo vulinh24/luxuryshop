@@ -58,34 +58,68 @@
 		}
 
 		.product-row {
-			border-bottom: 2px;
+			/*padding: 10px 0px;*/
 			clear: both;
+			border-bottom: 2px solid #f2f1ed;
+			height: 63px;
+			margin-top: 10px;
 		}
 
 		.description {
-			line-height: 20px;
-			display: inline-block;
 			font-size: 14px;
+			line-height: 14px;
+			display: block;
+			float: left;
 		}
 
 		.image-search-result {
-			height: 36px;
-			width: 36px;
+			height: 40px;
+			width: 50px;
 			padding: 0px 0px 0px 0px;
 			cursor: pointer;
-			border: #E0E0E0 1px solid;
+			/*border: #E0E0E0 1px solid;*/
 			margin-right: 10px;
+			float: left;
 		}
 
-		#search-list {
+		.search-section {
 			overflow: scroll;
-			height: 300px;
+			max-height: 340px;
 		}
 
 		#suggesstion-box {
 			position: absolute;
 			z-index: 10000;
 			background-color: white;
+			width: 100%;
+		}
+
+		::-webkit-scrollbar {
+			width: 0px;
+		}
+
+		span.price {
+			color: #ff6a00c4;
+			font-weight: bold;
+		}
+
+		span.desc {
+			max-width: 150px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 1; /* number of lines to show */
+			line-clamp: 1;
+			-webkit-box-orient: vertical;
+			font-size: 15px;
+		}
+
+		span.desc:hover {
+			color: cornflowerblue;
+		}
+
+		a.detail:hover {
+			color: cornflowerblue;
 		}
 	</style>
 </head>
@@ -397,7 +431,7 @@
 				type: "post",
 				crossDomain: true,
 				contentType: "application/json", // dữ liệu gửi lên web-service có dạng là json.
-				data: JSON.stringify('keyword=' + $(this).val()), // object json -> string json
+				data: $(this).val() == '' ? '-?' : $(this).val(), // object json -> string json
 				dataType: "text", // dữ liệu từ web-service trả về là json.
 				success: function (resp) {
 					$("#suggesstion-box").show();
@@ -407,11 +441,13 @@
 			});
 		});
 	});
-	// $(document).ready(function() {
-	// 	$("#search-box").blur(function() {
-	// 		$("#suggesstion-box").hide();
-	// 	});
-	// });
+	$(document).ready(function () {
+		$("#search-box").blur(function () {
+			$("#suggesstion-box").mouseleave(function () {
+				$("#suggesstion-box").hide();
+			});
+		});
+	});
 	$.ajaxSetup({headers: {'csrftoken': '{{ csrf_token() }}'}});
 </script>
 

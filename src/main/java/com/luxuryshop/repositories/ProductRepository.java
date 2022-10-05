@@ -8,11 +8,13 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-	List<Product> findByIsHotTrue();
+    List<Product> findByIsHotTrue();
 
-	List<Product> findByIsNewTrue();
+    List<Product> findByIsNewTrue();
 
-	List<Product> findByIsSaleTrue();
+    List<Product> findByIsSaleTrue();
 
-	List<Product> findBySeo(String seo);
+    List<Product> findBySeo(String seo);
+
+    List<Product> findByTitleContainingIgnoreCase(String title);
 }
