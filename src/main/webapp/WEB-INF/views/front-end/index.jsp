@@ -556,15 +556,18 @@
 
         <div class="row">
           <c:forEach begin="0" end="2" varStatus="loop">
-          		<div class="blog__section__item col-md-6 col-lg-4 mb-4 mb-lg-4">
-		            <div class="h-entry">
-		              <img style="height: 235px;" src="${pageContext.request.contextPath}/images/${blogs.get(loop.index).image}" alt="Image" class="img-fluid">
-		              <h2 class="font__size__regular"><a  class="text-black">${blogs.get(loop.index).title }</a></h2>
-		              <div class="meta mb-4">Love u <span class="mx-2">&bullet;</span> All time<span class="mx-2">&bullet;</span> </div>
-		              <p class="customm">${blogs.get(loop.index).description }</p>
-		              <p><a href="${pageContext.request.contextPath }/view-blog">Continue Reading...</a></p>
-		            </div> 
-         		 </div>
+              <div class="blog__section__item col-md-6 col-lg-4 mb-4 mb-lg-4">
+                  <div class="h-entry">
+                      <img style="height: 235px;"
+                           src="${pageContext.request.contextPath}/images/${blogs.get(loop.index).image}" alt="Image"
+                           class="img-fluid">
+                      <h2 class="font__size__regular"><a class="text-black">${blogs.get(loop.index).title }</a></h2>
+                      <div class="meta mb-4">Love u <span class="mx-2">&bullet;</span> All time<span class="mx-2">&bullet;</span>
+                      </div>
+                      <p class="customm">${blogs.get(loop.index).description }</p>
+                      <p><a href="${pageContext.request.contextPath }/view-blog">Đọc tiếp ...</a></p>
+                  </div>
+              </div>
           </c:forEach>
         </div>
       </div>

@@ -26,7 +26,8 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/js/**", "/images/**", "/summernote/**", "/file/upload/**").permitAll()
 
                 // thực hiện xác thực với các url kiểu ..../admin/....
-                .antMatchers("/delete-admin/**", "/admin/customers-delete/**", "/admin/slide-remove/**", "/admin/slide-add/**", "/admin/categories/**",
+                .antMatchers("/delete-admin/**", "/admin/customers-delete/**", "/admin/slide-remove/**", "/admin/slide-add/**", "/admin/categories/**", "/admin/decentralization-add",
+                        "/admin/category-add", "/admin/collection-add",
                         "/admin/collections/**", "/admin/categories-delete/**", "/admin/product-add/**", "/admin/product-delete/**", "/admin/collections-delete/**")
                 .hasRole("ADMIN")
 

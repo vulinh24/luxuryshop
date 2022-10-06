@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-   
+
+
 <!-- JSTL -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-   
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,15 +22,6 @@
 		}
 	</style>
 	<style>
-		.phppot-container {
-			-webkit-font-smoothing: antialiased;
-			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-			font-size: .9em;
-			color: #1e2a28;
-			width: 740px;
-			margin: 0 auto;
-			padding: 0px 20px 20px 20px;
-		}
 
 		.header-search {
 			padding: 40px;
@@ -197,59 +188,68 @@
                                                 <ul>
                                                 	<li><a <c:if test="${price == null }"> class="active"</c:if> href="${pageContext.request.contextPath}/shop/search?priceBegin=-1">Bỏ lọc</a></li>
                                                     <li><a <c:if test="${price == 0 }"> class="active"</c:if> href="${pageContext.request.contextPath}/shop/search?priceBegin=${'0'}&priceEnd=${'10000000'}&page=1">0đ - 10000000đ</a></li>
-                                                    <li><a <c:if test="${price == 10000000 }"> class="active"</c:if> href="${pageContext.request.contextPath}/shop/search?priceBegin=${'10000000'}&priceEnd=${'20000000'}&page=1">10000000đ - 20000000đ</a></li>
-                                                    <li><a <c:if test="${price == 20000000 }"> class="active"</c:if> href="${pageContext.request.contextPath}/shop/search?priceBegin=${'20000000'}&priceEnd=${'50000000'}&page=1">20000000đ - 50000000đ</a></li>
-                                                    <li><a <c:if test="${price == 50000000 }"> class="active"</c:if> href="${pageContext.request.contextPath}/shop/search?priceBegin=${'50000000'}&priceEnd=${'100000000'}&page=1">50000000 - 100000000</a></li>
-                                                    <li><a <c:if test="${price == 100000000 }"> class="active"</c:if> href="${pageContext.request.contextPath}/shop/search?priceBegin=${'100000000'}">100000000+</a></li>
+                                                    <li><a <c:if test="${price == 10000000 }"> class="active"</c:if>
+                                                            href="${pageContext.request.contextPath}/shop/search?priceBegin=${'10000000'}&priceEnd=${'20000000'}&page=1">10000000đ
+                                                        - 20000000đ</a></li>
+                                                    <li><a <c:if test="${price == 20000000 }"> class="active"</c:if>
+                                                            href="${pageContext.request.contextPath}/shop/search?priceBegin=${'20000000'}&priceEnd=${'50000000'}&page=1">20000000đ
+                                                        - 50000000đ</a></li>
+                                                    <li><a <c:if test="${price == 50000000 }"> class="active"</c:if>
+                                                            href="${pageContext.request.contextPath}/shop/search?priceBegin=${'50000000'}&priceEnd=${'100000000'}&page=1">50000000
+                                                        - 100000000</a></li>
+                                                    <li><a <c:if test="${price == 100000000 }"> class="active"</c:if>
+                                                            href="${pageContext.request.contextPath}/shop/search?priceBegin=${'100000000'}">100000000+</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    </div>
 
-									<div class="card">
-										<div class="card-heading">
-											<a data-toggle="collapse" data-target="#collapseOne">Bộ sưu tập
-												<img src="${pageContext.request.contextPath}/images/arrow-down.png"></a>
-										</div>
-										<div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-											<div class="card-body">
-												<div class="shop__sidebar__categories">
-													<ul class="nice-scroll">
-														<li>
-															<a href="${pageContext.request.contextPath}/shop/search?collectionid=-1&page=1"
-															   <c:if test="${empty currentCollectionId }">class="active"</c:if> >Bỏ
-																lọc</a></li>
-														<c:forEach var="collection" items="${collections }">
-															<li>
-																<a href="${pageContext.request.contextPath}/shop/search?collectionid=${collection.id}&page=1"
-																   class="${currentCollectionId==collection.id ? 'active' : '' }"> ${collection.name }
-															</li>
-														</c:forEach>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseOne">Bộ sưu tập
+                                                <img src="${pageContext.request.contextPath}/images/arrow-down.png"></a>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__categories">
+                                                    <ul class="nice-scroll">
+                                                        <li>
+                                                            <a href="${pageContext.request.contextPath}/shop/search?collectionid=-1&page=1"
+                                                               <c:if test="${empty currentCollectionId }">class="active"</c:if> >Bỏ
+                                                                lọc</a></li>
+                                                        <c:forEach var="collection" items="${collections }">
+                                                            <li>
+                                                                <a href="${pageContext.request.contextPath}/shop/search?collectionid=${collection.id}&page=1"
+                                                                   class="${currentCollectionId==collection.id ? 'active' : '' }"> ${collection.name }
+                                                            </li>
+                                                        </c:forEach>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-									<%--                                <div class="card">--%>
-									<%--                                    <div class="card-heading">--%>
-									<%--                                        <a data-toggle="collapse" data-target="#collapseSix">Thẻ--%>
-									<%--                                        <img src="${pageContext.request.contextPath}/images/arrow-down.png"></a>--%>
-									<%--                                    </div>--%>
-									<%--                                    <div id="collapseSix" class="collapse show" data-parent="#accordionExample">--%>
-									<%--                                        <div class="card-body">--%>
-									<%--                                            <div class="shop__sidebar__tags">--%>
-									<%--                                            	<c:forEach var="tag" items="${tags}">--%>
-									<%--                                            		<a href="${pageContext.request.contextPath}/shop/search?tag=${tag.upperName()}">${tag.upperName()}</a>--%>
-									<%--                                            	</c:forEach>--%>
-									<%--                                            </div>--%>
-									<%--                                        </div>--%>
-									<%--                                    </div>--%>
-									<%--                                </div>--%>
-								</c:if>
-                                
-                            </div>
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseSix">
+                                                    <%--									                                        <img src="${pageContext.request.contextPath}/images/arrow-down.png">--%>
+                                            </a>
+                                        </div>
+                                        <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__tags">
+                                                    <c:forEach var="tag" items="${tags}">
+                                                        <a href="${pageContext.request.contextPath}/shop/search?tag=${tag.upperName()}">${tag.upperName()}</a>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
+
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -263,8 +263,8 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__right">
-                                    
-                                    <c:if test="${empty favorite }">
+
+                                <c:if test="${empty favorite }">
                                     	<p>Sắp xếp giá:</p>
                                     	<select onchange="location = this.value;" style="width:20px;">
 	                                    	<option></option>
@@ -384,11 +384,11 @@
 			                 </div>
                         </c:forEach>
                     </div>
-                     
+
                     <div class="row">
                         <div class="col-lg-12">
-                            	
-								  <div class="product__pagination">
+
+                            <div class="product__pagination">
 								  		<c:choose>
 								  			<c:when test="${totalPage == 1 }">
 								  				<a href="${pageContext.request.contextPath}/shop/search?page=1" class="active"><button type="button" class="btn btn-outline-dark">1</button></a>
@@ -397,14 +397,21 @@
 								  				<c:if test="${currentPage > 1 && currentPage <= totalPage }">
 								  					<a href="${pageContext.request.contextPath}/shop/search?page=${currentPage - 1}"><button type="button" class="btn btn-outline-dark">&laquo;</button></a>
 								  				</c:if>
-								  				<c:forEach begin="1" end="${totalPage}" varStatus="loop"> 
-										  			<c:if test="${loop.index == currentPage }">
-										  			<a href="${pageContext.request.contextPath}/shop/search?page=${loop.index}" class="active"><button type="button" class="btn btn-outline-dark">${loop.index }</button></a>
-										  			</c:if>
-										  			<c:if test="${currentPage != loop.index }">
-										  			<a href="${pageContext.request.contextPath}/shop/search?page=${loop.index}"><button type="button" class="btn btn-outline-dark">${loop.index }</button></a>
-										  			</c:if>
-									  			</c:forEach>
+                                                <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                                                    <c:if test="${loop.index == currentPage }">
+                                                        <a href="${pageContext.request.contextPath}/shop/search?page=${loop.index}"
+                                                           class="active">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-dark">${loop.index }</button>
+                                                        </a>
+                                                    </c:if>
+                                                    <c:if test="${currentPage != loop.index }">
+                                                        <a href="${pageContext.request.contextPath}/shop/search?page=${loop.index}">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-dark">${loop.index }</button>
+                                                        </a>
+                                                    </c:if>
+                                                </c:forEach>
 									  			<c:if test="${currentPage >= 1 && currentPage < totalPage }">
 									  				<a href="${pageContext.request.contextPath}/shop/search?page=${currentPage + 1}"><button type="button" class="btn btn-outline-dark">&raquo;</button></a>
 									  			</c:if>

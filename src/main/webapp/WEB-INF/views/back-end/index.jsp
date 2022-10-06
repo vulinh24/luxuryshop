@@ -44,28 +44,28 @@
                             </a>
                         </div>
                         <div class="row">
-						    <canvas id="myChart"></canvas>
-						</div>
+                            <canvas id="myChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-	    <sec:authorize access="hasRole('TESTADMIN')">
-			alert("Để đảm bảo dữ liệu, vui lòng thêm dữ liệu mới để thực hiện chức năng!");
-		</sec:authorize>
-    </script>
-	<jsp:include page="/WEB-INF/views/back-end/common/js.jsp"></jsp:include>
-	<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
-	<!-- chart -->
-	<script>
-	$.ajax({
-		url : "/caculate",
-		type : "get",
-		dataType : "json",
-		success : function(res) {
-			var keyres = Object.keys(res);
+    <%--    <script type="text/javascript">--%>
+    <%--	    <sec:authorize access="hasRole('TESTADMIN')">--%>
+    <%--			alert("Để đảm bảo dữ liệu, vui lòng thêm dữ liệu mới để thực hiện chức năng!");--%>
+    <%--		</sec:authorize>--%>
+    <%--    </script>--%>
+    <jsp:include page="/WEB-INF/views/back-end/common/js.jsp"></jsp:include>
+    <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+    <!-- chart -->
+    <script>
+        $.ajax({
+            url: "/caculate",
+            type: "get",
+            dataType: "json",
+            success: function (res) {
+                var keyres = Object.keys(res);
 			var valueres = Object.values(res);
 			
 			let myChart = document.getElementById('myChart').getContext('2d');

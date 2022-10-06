@@ -43,6 +43,6 @@
 - num product : done - but not validate amount
 - refactor db : done
 - login fb/gg : done
-- search with api
-- send mail confirm detailOrder
+- search with api : done
+- send mail confirm detailOrder : done
 - new payment
