@@ -112,30 +112,35 @@
 											</tr>
 
 										</c:forEach>
-									</tbody>
-								</table>
-								<ul class="checkout__total__all">
-									<input id="total" type="hidden" value = "${total }">
-									<li>Tổng <span><fmt:formatNumber value="${total }" type="number" /></span></li>
-									<li>Giá sau mã <span id = "afterprice"><fmt:formatNumber value="${total }" type="number" /></span></li>
-								</ul>
-								
-								<p>Lựa chọn phương thức thanh toán.</p>
-								<div class="checkout__input__checkbox">
-									<label for="payment"> Thẻ tín dụng <input disabled
-										type="checkbox" id="payment"> <span class="checkmark"></span>
-									</label>
-								</div>
-								<div class="checkout__input__checkbox">
-									<label for="paypal"> Trả khi nhận hàng <input
-										type="checkbox" id="paypal"> <span class="checkmark"></span>
-									</label>
-								</div>
-								<button type="submit" class="site-btn">Đặt mua</button>
-							</div>
-						</div>
-					</div>
-				</form:form>
+                                    </tbody>
+                                </table>
+                                <ul class="checkout__total__all">
+                                    <input id="total" type="hidden" value="${total }">
+                                    <li>Tổng <span><fmt:formatNumber value="${total }" type="number"/></span></li>
+                                    <li>Giá sau mã <span id="afterprice"><fmt:formatNumber value="${total }"
+                                                                                           type="number"/></span></li>
+                                </ul>
+
+                                <p>Lựa chọn phương thức thanh toán.</p>
+                                <div class="checkout__input__checkbox">
+                                    <label for="payment"> Thanh toán bằng vnpay <img
+                                            src="${pageContext.request.contextPath}/images/vn-pay.png" width="30px"
+                                            height="20px"><input
+                                            type="radio" id="payment" name="payment" value="vnpay"> <span
+                                            class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="paypal"> Trả khi nhận hàng <input
+                                            type="radio" id="paypal" name="payment" value="cod"> <span
+                                            class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="site-btn">Đặt mua</button>
+                            </div>
+                        </div>
+                    </div>
+                </form:form>
 			</div>
 		</div>
 	</section>

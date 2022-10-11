@@ -39,16 +39,22 @@ public class Order extends ParentEntity {
 	private String customerEmail;
 
 	@Column(name = "customer_note")
-	private String customerNote;
+    private String customerNote;
 
-	@Column(name = "isCancel", nullable = false)
-	private Boolean isCancel = Boolean.FALSE;
+    @Column(name = "isCancel", nullable = false)
+    private Boolean isCancel = Boolean.FALSE;
 
     @Column(name = "status", nullable = true)
     private String status;
 
     @Column(name = "total_received", nullable = false)
     private Float totalReceived;
+
+    @Column(name = "payment", nullable = false)
+    private String payment;
+
+    @Column(name = "pay_status", nullable = true)
+    private String payStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -64,5 +70,8 @@ public class Order extends ParentEntity {
         }
         return total;
     }
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private VnpayDetail vnpayDetail;
 
 }

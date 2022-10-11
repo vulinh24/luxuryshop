@@ -39,7 +39,7 @@
 
 ** 2022
 - fix bug login : done
-- redis / kafka
+- kafka :
 - num product : done - but not validate amount
 - refactor db : done
 - login fb/gg : done
