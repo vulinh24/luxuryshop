@@ -125,9 +125,12 @@
     <jsp:include page="/WEB-INF/views/front-end/common/footer.jsp"></jsp:include>
     <jsp:include page="/WEB-INF/views/front-end/common/js.jsp"></jsp:include>
     <script type="text/javascript">
-    	<c:if test="${not empty checkout}">
+    	<c:if test="${param.checkout == 'success'}">
     		window.confirm("Đặt hàng thành công!");
     	</c:if>
+    	<c:if test="${param.checkout == 'fail'}">
+            window.confirm("Đặt hàng thất bại!");
+        </c:if>
     </script>
 </body>
 </html>

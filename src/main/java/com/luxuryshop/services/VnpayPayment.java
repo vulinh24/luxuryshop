@@ -15,9 +15,9 @@ import java.util.*;
 @Service
 public class VnpayPayment {
 
-    private final String vnp_TmnCode = "VQNPTJZS";
+    private final String vnp_TmnCode = "N08PFCE3";
     private final String vnp_Returnurl = "http://localhost:8888/vnpay-return";
-    private final String vnp_HashSecret = "APFHUTLHTZKKMGDOVDENCKPQULCLODRG";
+    private final String vnp_HashSecret = "ISCAYIQRKQTQYBDTQOGIFKZRTCCOZTJX";
     private final String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
 
     private static String hmacSHA512(final String key, final String data) {

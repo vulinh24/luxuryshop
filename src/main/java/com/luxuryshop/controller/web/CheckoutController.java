@@ -252,7 +252,7 @@ public class CheckoutController {
             VnpayDetail vnpayDetail = toVnpayDetail(vnpayReturn);
             vnpayDetail.setOrder(order);
             vnpayDetailRepository.save(vnpayDetail);
-            return "redirect:/home";
+            return "redirect:/shopping-cart?checkout=fail";
         }
     }
 
