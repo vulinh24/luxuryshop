@@ -147,6 +147,7 @@ public class CheckoutController {
                 detailOrder.setTotalReceived(tong);
                 detailOrder.setStatus("Chờ xác nhận");
                 detailOrder.setCreatedDate(LocalDateTime.now());
+                if (detailOrder.getPayment().equals("cod")) detailOrder.setPayment("COD");
                 detailOrder = detailRepository.save(detailOrder);
                 // save product in order
                 List<OrderProduct> saledProducts = new ArrayList<>();
@@ -204,6 +205,7 @@ public class CheckoutController {
                 detailOrder.setTotalReceived(tong);
                 detailOrder.setStatus("Chờ xác nhận");
                 detailOrder.setCreatedDate(LocalDateTime.now());
+                if (detailOrder.getPayment().equals("cod")) detailOrder.setPayment("COD");
                 detailOrder = detailRepository.save(detailOrder);
                 // save product in order
                 List<OrderProduct> saledProducts = new ArrayList<>();

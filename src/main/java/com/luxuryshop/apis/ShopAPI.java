@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luxuryshop.entities.*;
 import com.luxuryshop.entities.primarykey.PKOfCart;
 import com.luxuryshop.model.CartModel;
-import com.luxuryshop.repositories.CartRepository;
-import com.luxuryshop.repositories.DiscountRepository;
-import com.luxuryshop.repositories.ProductRepository;
-import com.luxuryshop.repositories.UserRepository;
+import com.luxuryshop.repositories.*;
 import com.luxuryshop.services.MyUserDetail;
 import com.luxuryshop.solve_exception.APIException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +46,9 @@ public class ShopAPI {
 
     @Autowired
     DiscountRepository discountRepository;
+
+    @Autowired
+    VnpayDetailRepository vnpayDetailRepository;
 
     @SuppressWarnings("unchecked")
     @Transactional
@@ -217,5 +217,11 @@ public class ShopAPI {
         resp = resp.concat("    </div>\n" +
                 "</div>");
         return resp;
+    }
+
+    @GetMapping("/order/vnpay-detail/{id}")
+    public VnpayDetail getVnPayDetail(@PathVariable Integer id, HttpServletRequest request) {
+        VnpayDetail vnpayDetail = vnpayDetailRepository.findByOrderId(id);
+        return vnpayDetail;
     }
 }
