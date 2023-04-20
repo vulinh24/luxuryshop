@@ -14,34 +14,9 @@
                 <jsp:include page="/WEB-INF/views/back-end/common/menu.jsp"></jsp:include>
                 <div class="right">
                     <div class="right__content">
-                        <div class="right__title">Bảng điều khiển</div>
-                        <p class="right__desc">Bảng điều khiển</p>
-                        <div class="right__cards">
-                            <a class="right__card" href="${pageContext.request.contextPath }/admin/products">
-                                <div class="right__cardTitle">Sản Phẩm</div>
-                                <div class="right__cardNumber">${qualityOfProduct }</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="${pageContext.request.contextPath}/assets/arrow-right.svg" alt=""></div>
-                            </a>
-                            <a class="right__card" href="${pageContext.request.contextPath }/admin/customers">
-                                <div class="right__cardTitle">Khách Hàng</div>
-                                <div class="right__cardNumber">${qualityOfUser }</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="${pageContext.request.contextPath}/assets/arrow-right.svg" alt=""></div>
-                            </a>
-                            <a class="right__card" href="${pageContext.request.contextPath }/admin/categories">
-                                <div class="right__cardTitle">Danh Mục</div>
-                                <div class="right__cardNumber">${qualityOfCategory }</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="${pageContext.request.contextPath}/assets/arrow-right.svg" alt=""></div>
-                            </a>
-                            <a class="right__card" href="${pageContext.request.contextPath }/admin/orders">
-                                <div class="right__cardTitle">Đơn Hàng</div>
-                                <div class="right__cardNumber">${qualityOfSaleOrder }</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="${pageContext.request.contextPath}/assets/arrow-right.svg" alt=""></div>
-                            </a>
-                            <a class="right__card" href="${pageContext.request.contextPath }/admin/collections">
-                                <div class="right__cardTitle">Bộ sưu tập</div>
-                                <div class="right__cardNumber">${qualityOfCollection }</div>
-                                <div class="right__cardDesc">Xem Chi Tiết <img src="${pageContext.request.contextPath}/assets/arrow-right.svg" alt=""></div>
-                            </a>
+
+                        <div class="row">
+                            <canvas id="myChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -64,7 +39,7 @@
             success: function (res) {
                 var keyres = Object.keys(res);
 			var valueres = Object.values(res);
-			
+
 			let myChart = document.getElementById('myChart').getContext('2d');
 		    // Global Options
 		    Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -122,12 +97,12 @@
 		    });
 		},
 		error : function(res) {
-			
+
 		}
 	});
-    
+
   </script>
 	<!--  -->
-	
+
 </body>
 </html>

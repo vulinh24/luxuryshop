@@ -32,6 +32,7 @@
                                             <th>Phone</th>
                                             <th>Địa chỉ</th>
                                             <th>Tên đăng nhập</th>
+                                            <th>Reset mật khẩu</th>
                                             <th>Xoá</th>
                                         </tr>
                                     </thead>
@@ -45,7 +46,9 @@
                                             <td data-label="Phone">${user.phone }</td>
                                             <td data-label="Địa chỉ">${user.address }</td>
                                             <td data-label="Tên đăng nhập">${user.username }</td>
+                                            <td data-label="Reset" class="right__iconTable"><button onclick="resetPass(${user.id})">Reset</button></td>
                                             <td data-label="Xoá" class="right__iconTable"><a onclick="myFunction(${user.id})"><img src="${pageContext.request.contextPath}/assets/icon-trash-black.svg" alt=""></a></td>
+
                                         </tr>
                                         </c:forEach>
                                     </tbody>
@@ -71,6 +74,16 @@
 			    even.prevenDefault();
 			  }
 		};
+
+		function resetPass(id) {
+		    var r = confirm("Bạn có muốn reset mật khẩu khách hàng này?");
+              if (r == true) {
+                window.location = "${pageContext.request.contextPath }/admin/customer/reset-password/" + id;
+              } else {
+                  event.stopPropagation();
+                even.prevenDefault();
+              }
+		}
 		
 		$(document).ready( function () {
 		    $('#myTable').DataTable();

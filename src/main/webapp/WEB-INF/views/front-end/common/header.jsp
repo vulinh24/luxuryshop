@@ -87,7 +87,7 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                          <a href="${pageContext.request.contextPath }/shop" class="search-switch"><img src="${pageContext.request.contextPath}/images/search.png" alt=""></a>
-                        	<sec:authorize access="hasAnyRole('ADMIN','TESTADMIN')">
+                        	<sec:authorize access="hasAnyRole('ADMIN','OPERATOR')">
 							<a href="${pageContext.request.contextPath}/admin"><img src="${pageContext.request.contextPath}/images/cart.png" alt="" title="admin"></a>
 							</sec:authorize>
 							<sec:authorize access="hasAuthority('ROLE_MEMBER')">

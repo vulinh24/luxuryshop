@@ -107,13 +107,14 @@
 						alt="">
 				</div>
 				<div class="left__text">
-					<a class="left__link"
-						href="${pageContext.request.contextPath}/admin/decentralization-add">Thêm
-						Admin</a> <a class="left__link"
-						href="${pageContext.request.contextPath}/admin/decentralization">Xem
-						Admins</a>
+					<a class="left__link" href="${pageContext.request.contextPath}/super-admin/decentralization-add">Thêm Operator</a>
+                    <a class="left__link" href="${pageContext.request.contextPath}/super-admin/decentralization">Xem Operators</a>
 				</div>
 			</li>
+			<li class="left__menuItem"><a
+            				href="${pageContext.request.contextPath}/super-admin/statistic" class="left__title"><img
+            					src="${pageContext.request.contextPath}/assets/icon-dashboard.svg"
+            					alt="">Thống kê</a></li>
 			<li class="left__menuItem"><a
 				href="${pageContext.request.contextPath}/" class="left__title"><img
 					src="${pageContext.request.contextPath}/assets/icon-logout.svg"

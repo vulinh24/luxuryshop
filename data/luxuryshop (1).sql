@@ -669,7 +669,7 @@ INSERT INTO `role` (`id`, `created_by`, `created_date`, `updated_by`, `updated_d
 VALUES (1, NULL, '2021-11-01 09:37:52.000000', NULL, NULL, 'quản trị viên', 'ROLE_ADMIN'),
        (2, NULL, '2021-11-01 09:37:52.000000', NULL, NULL, NULL, 'ROLE_MEMBER'),
        (3, NULL, '2021-11-01 09:37:52.000000', NULL, NULL, NULL, 'ROLE_GUEST'),
-       (4, NULL, NULL, NULL, NULL, 'admin khách', 'ROLE_TESTADMIN');
+       (4, NULL, NULL, NULL, NULL, 'admin khách', 'ROLE_OPERATOR');
 
 -- --------------------------------------------------------
 

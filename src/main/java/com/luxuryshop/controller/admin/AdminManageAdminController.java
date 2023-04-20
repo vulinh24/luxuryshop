@@ -26,15 +26,15 @@ public class AdminManageAdminController {
 	@Autowired
 	UserRepository userRepository;
 
-	@RequestMapping(value = { "/admin/decentralization" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/super-admin/decentralization" }, method = RequestMethod.GET)
 	public String index(final ModelMap model, final HttpServletRequest request, final HttpServletResponse Response)
 			throws Exception {
-		Role role = roleRepository.findByName("ROLE_TESTADMIN");
+		Role role = roleRepository.findByName("ROLE_OPERATOR");
 		model.addAttribute("users", role.getUsers());
 		return "back-end/view_admins";
 	}
 
-	@RequestMapping(value = { "/admin/decentralization-add" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/super-admin/decentralization-add" }, method = RequestMethod.GET)
 	public String viewadd(final ModelMap model, final HttpServletRequest request, final HttpServletResponse Response)
 			throws Exception {
 
@@ -45,19 +45,21 @@ public class AdminManageAdminController {
 	}
 
 	@Transactional
-	@RequestMapping(value = { "/admin/decentralization-add" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/super-admin/decentralization-add" }, method = RequestMethod.POST)
 	public String add(final ModelMap model, final HttpServletRequest request, final HttpServletResponse Response)
 			throws Exception {
 		try {
 			String username = request.getParameter("username");
-			Role role = roleRepository.findByName("ROLE_TESTADMIN");
+			Role role = roleRepository.findByName("ROLE_OPERATOR");
 			User user = userRepository.findByUsername(username);
 			if (user == null) {
-				return "redirect:/admin/decentralization-add?notfound=true";
+				return "redirect:/super-admin/decentralization-add?notfound=true";
 			} else {
 				List<Role> roles = user.getRoles();
+				if (!roles.isEmpty())
+					roles.remove(0);
 				roles.add(role);
-				return "redirect:/admin/decentralization";
+				return "redirect:/super-admin/decentralization";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,12 +73,12 @@ public class AdminManageAdminController {
 						 final HttpServletResponse Response) throws Exception {
 		try {
 			Role role = roleRepository.findByName("ROLE_MEMBER");
-			Role roleAdmin = roleRepository.findByName("ROLE_TESTADMIN");
+			Role roleAdmin = roleRepository.findByName("ROLE_OPERATOR");
 			User user = userRepository.getById(id);
 			List<Role> roles = user.getRoles();
 			roles.add(role);
 			roles.remove(roleAdmin);
-			return "redirect:/admin/decentralization";
+			return "redirect:/super-admin/decentralization";
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new CustomException();

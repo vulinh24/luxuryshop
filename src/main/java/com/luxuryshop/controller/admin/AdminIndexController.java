@@ -51,7 +51,7 @@ public class AdminIndexController {
 			request.getSession().setAttribute("USER_ADMIN", user);
 			request.getSession().setAttribute("USER", user.getUsername());
 			model.addAttribute("qualityOfProduct", productRepository.count());
-			model.addAttribute("qualityOfUser", userRepository.count());
+			model.addAttribute("qualityOfUser", userRepository.countCustomerUser());
 			model.addAttribute("qualityOfCategory", categoryRepository.count());
 			model.addAttribute("qualityOfSaleOrder", saleOrderRepo.count());
 			model.addAttribute("qualityOfCollection", collectionRepository.count());
@@ -62,11 +62,11 @@ public class AdminIndexController {
 		}
 	}
 	
-	@SuppressWarnings("rawtypes")
-	@ResponseBody
-	@RequestMapping(value = "/caculate", method = RequestMethod.GET)
-	public ResponseEntity cacul() {
-		return ResponseEntity.ok(chart.count());
-	}
+//	@SuppressWarnings("rawtypes")
+//	@ResponseBody
+//	@RequestMapping(value = "/caculate", method = RequestMethod.GET)
+//	public ResponseEntity cacul() {
+//		return ResponseEntity.ok(chart.count());
+//	}
 
 }

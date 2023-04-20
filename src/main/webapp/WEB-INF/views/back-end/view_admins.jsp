@@ -29,6 +29,7 @@
                                             <th>Username</th>
                                             <th>Tên</th>
                                             <th>Email</th>
+                                            <th>Reset mật khẩu</th>
                                             <th>Xoá</th>
                                         </tr>
                                     </thead>
@@ -40,6 +41,7 @@
 	                                            <td data-label="Username">${user.username }</td>
 	                                            <td data-label="Tên">${user.name }</td>
 	                                            <td data-label="Email">${user.email }</td>
+	                                            <td data-label="Reset" class="right__iconTable"><button onclick="resetPass(${user.id})">Reset</button></td>
 	                                            <td data-label="Xoá" class="right__iconTable"><a href="${pageContext.request.contextPath }/delete-admin/${user.id}"><img src="${pageContext.request.contextPath}/assets/icon-trash-black.svg" alt=""></a></td>
                                         	</tr>
                                     	</c:forEach>
@@ -55,5 +57,16 @@
     </div>
 
     <jsp:include page="/WEB-INF/views/back-end/common/js.jsp"></jsp:include>
+    <script>
+        function resetPass(id) {
+        		    var r = confirm("Bạn có muốn reset mật khẩu khách hàng này?");
+                      if (r == true) {
+                        window.location = "${pageContext.request.contextPath }/admin/customer/reset-password/" + id;
+                      } else {
+                          event.stopPropagation();
+                        even.prevenDefault();
+                      }
+        		}
+    </script>
 </body>
 </html>

@@ -51,4 +51,19 @@ public class SendMailService {
             throw new RuntimeException(e);
         }
     }
+
+    public void sendMailResetPassword(String password, String mail) {
+        MimeMessage mimeMessage = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+        String htmlMsg = "<h3>Mật khẩu đã được đổi thành công. Mật khẩu mới của bạn là: </h3>" + password;
+        try {
+            helper.setText(htmlMsg, true); // Use this or above line.
+            helper.setTo(mail);
+            helper.setSubject("Luxury Shop - Reset Password");
+            helper.setFrom(MY_MAIL);
+            sender.send(mimeMessage);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

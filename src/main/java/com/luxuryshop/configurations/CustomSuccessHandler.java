@@ -27,7 +27,7 @@ public class CustomSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 		@SuppressWarnings("unchecked")
 		Set<GrantedAuthority> authors = (Set<GrantedAuthority>) userLogined.getAuthorities();
 		for (GrantedAuthority author : authors) {
-			if (author.getAuthority().equals("ROLE_ADMIN") || author.getAuthority().equals("ROLE_TESTADMIN")) {
+			if (author.getAuthority().equals("ROLE_ADMIN") || author.getAuthority().equals("ROLE_OPERATOR")) {
 				response.sendRedirect(request.getContextPath() + "/admin");
 				return;
 			}

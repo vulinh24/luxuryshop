@@ -22,12 +22,12 @@
                 <div class="right">
                     <div class="right__content">
                         <div class="right__title">Bảng điều khiển</div>
-                        <p class="right__desc">Thêm admin khách</p>
+                        <p class="right__desc">Thêm Operator</p>
                         <div class="right__formWrapper">
-                            <form action="/admin/decentralization-add" method="post">
+                            <form action="/super-admin/decentralization-add" method="post">
                                 <div class="right__inputWrapper">
-                                    <label for="name">Username admin</label>
-                                    <input type="text" placeholder="username admin" name="username">
+                                    <label for="name">Username </label>
+                                    <input type="text" placeholder="username" name="username">
                                 </div>
                                 <div class="right__inputWrapper">
                                     <label for="email">Email</label>

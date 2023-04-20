@@ -61,7 +61,10 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/admin/**")//.authenticated()
                 //edit
-                .hasAnyRole("ADMIN", "TESTADMIN")
+                .hasAnyRole("ADMIN", "OPERATOR")
+                .antMatchers("/super-admin/**")//.authenticated()
+                //edit
+                .hasAnyRole("ADMIN")
                 .antMatchers("/api/v1/change/**")
                 .hasRole("ADMIN")
                 .antMatchers("/", "/auth/**", "/suggest-search").permitAll()
