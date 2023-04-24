@@ -89,7 +89,10 @@
 											<td class="quantity__item">
 												<div class="quantity">
 													<div class="pro-qty-2">
-														<input id="quantity_${item.productCart.id }" value="${item.quantity }" type="number" min="1" max="999" onchange="cart.linh_change_quantity_product(${item.productCart.id },$('#quantity_${item.productCart.id }').val(),'#price_${item.productCart.id }',${item.productCart.price });" >
+														<input id="quantity_${item.productCart.id }" value="${item.quantity }" type="number" min="1" max="999"
+														    onfocus="this.oldvalue = this.value;"
+														    onchange="cart.linh_change_quantity_product(this.oldvalue,${item.productCart.id },$('#quantity_${item.productCart.id }').val(),'#price_${item.productCart.id }','#quantity_${item.productCart.id }',${item.productCart.price });"
+														>
 													</div>
 												</div>
 											</td>

@@ -1,7 +1,11 @@
 package com.luxuryshop.controller.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luxuryshop.configurations.WebCommonConfig;
 import com.luxuryshop.entities.*;
 import com.luxuryshop.entities.primarykey.PKOfCart;
+import com.luxuryshop.kafka.UserLogKafka;
+import com.luxuryshop.kafka.service.KafkaProducerService;
 import com.luxuryshop.model.ProductFilterModel;
 import com.luxuryshop.repositories.*;
 import com.luxuryshop.services.MyUserDetail;
@@ -51,6 +55,9 @@ public class ShopController {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    KafkaProducerService kafkaProducerService;
 
     @RequestMapping(value = "/shop", method = RequestMethod.GET)
     public String index(Model model) throws Exception {
@@ -199,6 +206,19 @@ public class ShopController {
             model.addAttribute("keyset", images.keySet());
             model.addAttribute("proDetail", product.getProductDetail());
             model.addAttribute("cate", "shop");
+            // send log message
+            UserLogKafka userLogKafka = new UserLogKafka();
+            userLogKafka.setAction(UserLogKafka.Action.getLabel(UserLogKafka.Action.VIEW));
+            HttpSession session = request.getSession();
+            if (session.getAttribute("USER") != null) {
+                MyUserDetail userDetail = (MyUserDetail)
+                        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User user = userDetail.getUser();
+                userLogKafka.setOwnerId(user.getId());
+            } else userLogKafka.setOwnerId(null);
+            userLogKafka.setProductId(product.getId());
+            ObjectMapper objectMapper = new ObjectMapper();
+            kafkaProducerService.sendMessage(WebCommonConfig.TOPIC_LOG_KAFKA, null, objectMapper.writeValueAsString(userLogKafka));
             return "front-end/shop-details";
         } catch (Exception e) {
             e.printStackTrace();

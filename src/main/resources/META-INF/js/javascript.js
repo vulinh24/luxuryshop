@@ -233,7 +233,7 @@ var cart = {
 			    }
 			});
 		},
-	linh_change_quantity_product: function(maSanPham, soluong,id_price,price_one) {
+	linh_change_quantity_product: function(oldValue, maSanPham, soluong,id_price, id_quantity,price_one) {
 			var data = {};
 			data["productId"] = maSanPham;
 			data["quantity"] = soluong;
@@ -250,8 +250,9 @@ var cart = {
 					var format = format2(String(price));
 					$(id_price).html(format);
 				},
-				error: function (error) { // error callback 
-			        alert("Cập nhật thất bại!");
+				error: function (error) { // error callback
+				    $(id_quantity).val(oldValue);
+			        alert("Sản phẩm đã hết hoặc có lỗi xảy ra!");
 			    }
 			});
 		},

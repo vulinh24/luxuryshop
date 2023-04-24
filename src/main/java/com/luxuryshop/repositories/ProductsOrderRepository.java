@@ -8,7 +8,7 @@ import java.sql.Date;
 
 public interface ProductsOrderRepository extends JpaRepository<OrderProduct, Integer> {
 
-	@Query(value = "SELECT SUM(p.productPrice * p.quantity) FROM OrderProduct p WHERE p.selledDate = ?1")
+	@Query(value = "SELECT SUM(p.productPrice * p.quantity) FROM OrderProduct p WHERE p.selledDate = ?1 and p.order.status = 'Đang giao hàng'")
 	public Float countByDate(Date date);
 
 

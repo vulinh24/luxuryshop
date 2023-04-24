@@ -120,7 +120,7 @@
 		                                            </td>
 		                                            
 		                                            <td data-label="Xoá" class="right__iconTable" rowspan="${order.saledOrder.size() + 1 }" id="cancel-${order.id }">
-		                                            <c:if test="${order.status eq 'Chờ xác nhận' }">
+
 		                                            	<c:choose>
 		                                                		<c:when test="${order.isCancel}">
 		                                                			<span class="badge badge-danger">Đã Huỷ</span>
@@ -128,7 +128,7 @@
 		                                                		<c:otherwise>
 		                                                			<a href="javascript:void(0)" onclick="shop3.is_cancel(${order.id})"><img src="${pageContext.request.contextPath}/assets/icon-trash-black.svg" alt=""></a>
 		                                                		</c:otherwise>
-		                                                	</c:choose></c:if></td>
+		                                                	</c:choose></td>
 		                                        </tr>
 	                                        <c:forEach varStatus="loop2" begin="1" end="${order.saledOrder.size() - 1}" items="${order.saledOrder }">
 		                                        <tr>

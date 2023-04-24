@@ -19,7 +19,7 @@ public class Chart {
 	@SuppressWarnings("rawtypes")
 	public Map count() {
 		Map<LocalDate, Float> res = new HashMap<>();
-		for(int i = 0; i <= 6; ++i) {
+		for(int i = 0; i <= 14; ++i) {
 			LocalDate now = LocalDate.now();
 			LocalDate date = now.minusDays(i);
 			Float total = orderRepository.countByDate(Date.valueOf(date));

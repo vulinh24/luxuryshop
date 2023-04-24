@@ -108,15 +108,17 @@ public class ShopAPI {
     @SuppressWarnings("unchecked")
     @Transactional
     @RequestMapping(value = {"/change-product-cart"}, method = RequestMethod.POST)
-    public void changeQuantity(@RequestBody String json, Model model) throws Exception {
+    public ResponseEntity changeQuantity(@RequestBody String json, Model model) throws Exception {
         HttpSession session = request.getSession();
+        ObjectMapper om = new ObjectMapper();
+        CartModel cartModel = om.readValue(json, CartModel.class);
         if (session.getAttribute("USER") != null) {
             int numCart = (int) session.getAttribute("NUM_CART");
             MyUserDetail userDetail = (MyUserDetail)
                     SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = userDetail.getUser();
-            ObjectMapper om = new ObjectMapper();
-            CartModel cartModel = om.readValue(json, CartModel.class);
+            Product product = productRepository.findById(cartModel.getProductId()).get();
+            if (product.getAmount() < cartModel.getQuantity()) return ResponseEntity.badRequest().build();
             PKOfCart pk = new PKOfCart(user.getId(), cartModel.getProductId());
             Cart cart = cartRepository.findById(pk).get();
             int preQuantity = cart.getQuantity();
@@ -127,8 +129,8 @@ public class ShopAPI {
             session.setAttribute("NUM_CART", numCart + (cartModel.getQuantity() - preQuantity));
             model.addAttribute("cate", "shop");
         } else {
-            ObjectMapper om = new ObjectMapper();
-            CartModel cartModel = om.readValue(json, CartModel.class);
+            Product product = productRepository.findById(cartModel.getProductId()).get();
+            if (product.getAmount() < cartModel.getQuantity()) return ResponseEntity.badRequest().build();
             Map<Integer, Integer> CART = null;
             Integer numCart = 0;
             if (session.getAttribute("gCART") == null) {
@@ -143,6 +145,7 @@ public class ShopAPI {
             session.setAttribute("NUM_CART", numCart + (cartModel.getQuantity() - preQuantity));
             model.addAttribute("cate", "shop");
         }
+        return ResponseEntity.ok().build();
     }
 
     @SuppressWarnings("unchecked")
