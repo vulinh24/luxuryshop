@@ -20,7 +20,7 @@ public class WebConstants {
 	 * location saves images
 	 */
 	//todo change when switch new device
-	public static final String IMG_URL = "D:/Projects/LuxuryShop/src/main/resources/META-INF/upload/";
+	public static final String IMG_URL = "/home/linhvu/luxuryshop/src/main/resources/META-INF/upload/";
 
 	public static final String ORDER_EMAIL_1 = "<table style=\"border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #eeeeee;width:100%\" cellpadding=\"0\" cellspacing=\"0\">\n" +
 			"\t<tbody>\n" +

@@ -204,7 +204,6 @@ public class ShopController {
             model.addAttribute("product", product);
             model.addAttribute("images", images);
             model.addAttribute("keyset", images.keySet());
-            model.addAttribute("proDetail", product.getProductDetail());
             model.addAttribute("cate", "shop");
             // send log message
             UserLogKafka userLogKafka = new UserLogKafka();

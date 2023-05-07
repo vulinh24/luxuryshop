@@ -102,23 +102,22 @@
 									<form:textarea id="txtDetailDescription" class="form-control" path="detailDescription"/>
                                 </div>
                                 
-                                <form:hidden path="productDetail.id"/>
-                                <form:hidden path="productDetail.product.id"/>
+
                                 <div class="right__inputWrapper">
                                     <label>Kích thước</label>
-                                    <form:input type="text" class="form-control" path="productDetail.dimension"/>
+                                    <form:input type="text" class="form-control" path="dimension"/>
                                 </div>
                                 <div class="right__inputWrapper">
                                     <label>Chất liệu</label>
-                                    <form:input type="text" class="form-control" path="productDetail.material"/>
+                                    <form:input type="text" class="form-control" path="material"/>
                                 </div>
                                 <div class="right__inputWrapper">
                                     <label>Xuất xứ</label>
-                                    <form:input type="text" class="form-control" path="productDetail.origin"/>
+                                    <form:input type="text" class="form-control" path="origin"/>
                                 </div>
                                 <div class="right__inputWrapper">
                                     <label>Bảo hành</label>
-                                    <form:input type="text" class="form-control" path="productDetail.insurance"/>
+                                    <form:input type="text" class="form-control" path="insurance"/>
                                 </div>
 
                                 <div class="right__inputWrapper">

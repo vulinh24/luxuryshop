@@ -117,16 +117,16 @@
                     	<h4 style="font-size: 23px;margin-left:0px;text-align: left;"><b>${product.title }</b></h4>
                         <ul class="linh-custom">
                             <li>
-                            	<b>Kích thước(cm): </b>${proDetail.dimension }
+                            	<b>Kích thước(cm): </b>${product.dimension }
                             </li>
                             <li>
-                            	<b>Chất liệu: </b>${proDetail.material }
+                            	<b>Chất liệu: </b>${product.material }
                             </li>
                             <li>
-	                            <b>Xuất xứ: </b>${proDetail.origin }
+	                            <b>Xuất xứ: </b>${product.origin }
                             </li>
                             <li>
-	                            <b>Bảo hành: </b>${proDetail.insurance }
+	                            <b>Bảo hành: </b>${product.insurance }
                             </li>
                         </ul>
                     </div>

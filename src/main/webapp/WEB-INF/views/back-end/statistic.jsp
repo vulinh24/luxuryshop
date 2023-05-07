@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+
+<!-- JSTL -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!-- SPRING FORM -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +27,43 @@
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>
+
+                    <div class="right__content">
+                                        <div class="right__title" style="width: 500px;">Top Sản Phẩm Bán Chạy Nhất</div>
+                                        <div class="right__table">
+                                            <div class="right__tableWrapper">
+                                                <table id="myTable" style="border:none;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">STT</th>
+                                                        <th scope="col">Tên sản phẩm</th>
+                                                        <th scope="col">Giá bán</th>
+                                                        <th scope="col">Giá Cũ</th>
+                                                        <th scope="col">Số lượng đã bán</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <c:forEach var="product" items="${products }" varStatus="loop">
+                                                        <tr>
+                                                            <td data-label="STT" scope="row">${loop.index + 1}</td>
+                                                            <td data-label="Tên sản phẩm">${product.title }</td>
+                                                            <td data-label="Giá SP"><fmt:formatNumber value="${product.price }"
+                                                                                                      type="number"/></td>
+                                                            <td data-label="Giá Sale"><fmt:formatNumber value="${product.priceOld }"
+                                                                                                        type="number"/></td>
+                                                            <td data-label="Số lượng">${product.amount}</td>
+
+
+                                                        </tr>
+                                                    </c:forEach>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                 </div>
             </div>
         </div>

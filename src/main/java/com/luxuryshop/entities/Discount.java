@@ -22,4 +22,7 @@ public class Discount extends ParentEntity {
 
     @Column(name = "discount", nullable = false)
     private Float discount;
+
+    @Column(name = "remain", nullable = false)
+    private Integer remain;
 }

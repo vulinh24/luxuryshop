@@ -11,11 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "blog")
-public class Blog {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class Blog extends ParentEntity{
 
 	@Column(name = "title", nullable = true)
 	private String title;

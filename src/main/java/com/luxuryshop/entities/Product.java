@@ -58,6 +58,18 @@ public class Product extends ParentEntity implements Serializable, Comparable<Pr
     @Column(name = "amount", columnDefinition = "integer default 0")
     private Integer amount;
 
+	@Column(name = "dimension",nullable = true)
+	private String dimension;
+
+	@Column(name = "origin")
+	private String origin;
+
+	@Column(name = "material")
+	private String material;
+
+	@Column(name = "insurance")
+	private String insurance;
+
     // get only specific property in relation: many-to-one or one-to-many ,...
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
@@ -80,8 +92,8 @@ public class Product extends ParentEntity implements Serializable, Comparable<Pr
 	@JoinColumn(name = "collection_id" , nullable = true)
 	private Collection collection;
 	
-	@OneToOne(mappedBy = "product",  cascade = CascadeType.ALL)
-	private ProductDetail productDetail;
+//	@OneToOne(mappedBy = "product",  cascade = CascadeType.ALL)
+//	private ProductDetail productDetail;
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "fProducts" , fetch = FetchType.LAZY)

@@ -11,10 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "tag_search")
-public class Tag {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class Tag extends ParentEntity{
 	
 	@Column(name = "name" , length = 50)
 	private String name;

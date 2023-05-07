@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.luxuryshop.entities.Product;
-import com.luxuryshop.entities.ProductDetail;
+//import com.luxuryshop.entities.ProductDetail;
 import com.luxuryshop.entities.ProductImages;
 import com.luxuryshop.model.ProductFilterModel;
 import com.luxuryshop.repositories.ImageRepository;
@@ -130,12 +130,12 @@ public class ProductService {
 			String seo = slg.slugify(product.getTitle() + "-" + System.currentTimeMillis());
 			product.setSeo(seo);
 			product.setCreatedDate(LocalDateTime.now());
-			ProductDetail detail = product.getProductDetail();
-			product.setProductDetail(null);
+//			ProductDetail detail = product.getProductDetail();
+//			product.setProductDetail(null);
 			product.setRate(5);
 			Product newProduct  = productRepository.save(product);
-			detail.setProduct(newProduct);
-			detailRepository.save(detail);
+//			detail.setProduct(newProduct);
+//			detailRepository.save(detail);
 			if (!isEmptyUploadFile(productImages)) { // có upload ảnh lên.
 				for (MultipartFile productImage : productImages) {
 	
