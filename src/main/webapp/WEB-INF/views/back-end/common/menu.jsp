@@ -84,6 +84,22 @@
 						Slide</a>
 				</div>
 			</li>
+			<li class="left__menuItem">
+                <div class="left__title">
+                    <img
+                        src="${pageContext.request.contextPath}/assets/icon-tag.svg"
+                        alt="">Mã giảm giá<img class="left__iconDown"
+                        src="${pageContext.request.contextPath}/assets/arrow-down.svg"
+                        alt="">
+                </div>
+                <div class="left__text">
+                    <a class="left__link"
+                        href="${pageContext.request.contextPath}/admin/discount-add">Thêm
+                        mã giảm giá</a> <a class="left__link"
+                        href="${pageContext.request.contextPath}/admin/discounts">Xem
+                        mã giảm giá</a>
+                </div>
+            </li>
 			<li class="left__menuItem"><a
 				href="${pageContext.request.contextPath}/admin/customers"
 				class="left__title"><img

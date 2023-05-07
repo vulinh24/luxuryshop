@@ -127,7 +127,7 @@
 
                                 <div class="right__inputWrapper">
                                     <label>Số lượng</label>
-                                    <form:input type="text" class="form-control" path="amount"/>
+                                    <form:input type="text" class="form-control" path="amount" required="true"/>
                                 </div>
 
                                 <button class="btn" type="submit">Thêm</button>

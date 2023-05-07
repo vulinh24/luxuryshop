@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
@@ -15,14 +16,14 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "discount")
-public class Discount extends ParentEntity {
+public class Discount extends ParentEntity implements Serializable {
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @Column(name = "discount", nullable = false)
-    private Float discount;
+    private float discount;
 
     @Column(name = "remain", nullable = false)
-    private Integer remain;
+    private int remain;
 }

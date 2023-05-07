@@ -186,7 +186,7 @@ public class ShopAPI {
     public String checkdiscount(@PathVariable String name, HttpServletRequest request) {
 
         Discount check = discountRepository.findByName(name.toUpperCase());
-        if (check != null) {
+        if (check != null && check.getRemain() > 0) {
             return String.valueOf(check.getDiscount());
         } else return "notfound";
     }

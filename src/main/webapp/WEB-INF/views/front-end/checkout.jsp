@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="checkout__input__checkbox">
                                     <label for="paypal"> Trả khi nhận hàng <input
-                                            type="radio" id="paypal" name="payment" value="cod"> <span
+                                            type="radio" id="paypal" name="payment" value="COD"> <span
                                             class="checkmark"></span>
                                     </label>
                                 </div>

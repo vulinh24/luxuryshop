@@ -134,7 +134,10 @@ public class CheckoutController {
                 String ccode = request.getParameter("ccode");
                 if (ccode != null && ccode != "") {
                     detailOrder.setCode(ccode);
-                    discount = discountRepository.findByName(ccode.toUpperCase()).getDiscount();
+                    Discount mgg = discountRepository.findByName(ccode.toUpperCase());
+                    discount = mgg.getDiscount();
+                    mgg.setRemain(mgg.getRemain() - 1);
+                    discountRepository.save(mgg);
                 }
 
                 List<Cart> carts = cartRepository.findByUserName(udetail.getUser().getUsername());
@@ -147,7 +150,7 @@ public class CheckoutController {
                 detailOrder.setTotalReceived(tong);
                 detailOrder.setStatus("Chờ xác nhận");
                 detailOrder.setCreatedDate(LocalDateTime.now());
-                if (detailOrder.getPayment().equals("cod")) detailOrder.setPayment("COD");
+                if (detailOrder.getPayment().equals("COD")) detailOrder.setPayment("COD");
                 detailOrder = detailRepository.save(detailOrder);
                 // save product in order
                 List<OrderProduct> saledProducts = new ArrayList<>();
@@ -167,7 +170,7 @@ public class CheckoutController {
                 // xoá giỏ hàng đi
                 cartRepository.deleteAll(carts);
                 session.setAttribute("NUM_CART", 0);
-                if (detailOrder.getPayment().equals("cod")) {
+                if (detailOrder.getPayment().equals("COD")) {
                     return "redirect:/shopping-cart?checkout=success";
                 } else {
                     return "redirect:" + vnpayPayment.getUrlVnpayPage(request, detailOrder);
@@ -180,7 +183,10 @@ public class CheckoutController {
                 String ccode = request.getParameter("ccode");
                 if (ccode != null && ccode != "") {
                     detailOrder.setCode(ccode);
-                    discount = discountRepository.findByName(ccode.toUpperCase()).getDiscount();
+                    Discount mgg = discountRepository.findByName(ccode.toUpperCase());
+                    discount = mgg.getDiscount();
+                    mgg.setRemain(mgg.getRemain() - 1);
+                    discountRepository.save(mgg);
                 }
 
                 List<Cart> carts = new ArrayList<>();
@@ -205,7 +211,7 @@ public class CheckoutController {
                 detailOrder.setTotalReceived(tong);
                 detailOrder.setStatus("Chờ xác nhận");
                 detailOrder.setCreatedDate(LocalDateTime.now());
-                if (detailOrder.getPayment().equals("cod")) detailOrder.setPayment("COD");
+                if (detailOrder.getPayment().equals("COD")) detailOrder.setPayment("COD");
                 detailOrder = detailRepository.save(detailOrder);
                 // save product in order
                 List<OrderProduct> saledProducts = new ArrayList<>();
@@ -225,7 +231,7 @@ public class CheckoutController {
                 // xoá giỏ hàng đi
                 session.removeAttribute("gCART");
                 session.setAttribute("NUM_CART", 0);
-                if (detailOrder.getPayment().equals("cod")) {
+                if (detailOrder.getPayment().equals("COD")) {
                     return "redirect:/shopping-cart?checkout=success";
                 } else {
                     return "redirect:" + vnpayPayment.getUrlVnpayPage(request, detailOrder);
