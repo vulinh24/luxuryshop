@@ -29,40 +29,76 @@
                     </div>
 
                     <div class="right__content">
-                                        <div class="right__title" style="width: 500px;">Top Sản Phẩm Bán Chạy Nhất</div>
-                                        <div class="right__table">
-                                            <div class="right__tableWrapper">
-                                                <table id="myTable" style="border:none;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">STT</th>
-                                                        <th scope="col">Tên sản phẩm</th>
-                                                        <th scope="col">Giá bán</th>
-                                                        <th scope="col">Giá Cũ</th>
-                                                        <th scope="col">Số lượng đã bán</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <c:forEach var="product" items="${products }" varStatus="loop">
-                                                        <tr>
-                                                            <td data-label="STT" scope="row">${loop.index + 1}</td>
-                                                            <td data-label="Tên sản phẩm">${product.title }</td>
-                                                            <td data-label="Giá SP"><fmt:formatNumber value="${product.price }"
-                                                                                                      type="number"/></td>
-                                                            <td data-label="Giá Sale"><fmt:formatNumber value="${product.priceOld }"
-                                                                                                        type="number"/></td>
-                                                            <td data-label="Số lượng">${product.amount}</td>
+                        <div class="right__title" style="width: 500px;">Top 20 Sản Phẩm Bán Chạy Nhất</div>
+                        <div class="right__table">
+                            <div class="right__tableWrapper">
+                                <table id="myTable" style="border:none;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Giá bán</th>
+                                        <th scope="col">Giá Cũ</th>
+                                        <th scope="col">Số lượng đã bán</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="product" items="${sell_products }" varStatus="loop">
+                                        <tr>
+                                            <td data-label="STT" scope="row">${loop.index + 1}</td>
+                                            <td data-label="Tên sản phẩm">${product.title }</td>
+                                            <td data-label="Giá SP"><fmt:formatNumber value="${product.price }"
+                                                                                      type="number"/></td>
+                                            <td data-label="Giá Sale"><fmt:formatNumber value="${product.priceOld }"
+                                                                                        type="number"/></td>
+                                            <td data-label="Số lượng">${product.amount}</td>
 
 
-                                                        </tr>
-                                                    </c:forEach>
+                                        </tr>
+                                    </c:forEach>
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+
+                    <div class="right__content">
+                        <div class="right__title" style="width: 500px;">20 Sản Phẩm Được Quan Tâm Nhất</div>
+                        <div class="right__table">
+                            <div class="right__tableWrapper">
+                                <table id="myTable" style="border:none;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Giá bán</th>
+                                        <th scope="col">Giá Cũ</th>
+                                        <th scope="col">Số lần quan tâm</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="product" items="${view_products }" varStatus="loop">
+                                        <tr>
+                                            <td data-label="STT" scope="row">${loop.index + 1}</td>
+                                            <td data-label="Tên sản phẩm">${product.title }</td>
+                                            <td data-label="Giá SP"><fmt:formatNumber value="${product.price }"
+                                                                                      type="number"/></td>
+                                            <td data-label="Giá Sale"><fmt:formatNumber value="${product.priceOld }"
+                                                                                        type="number"/></td>
+                                            <td data-label="Số lượng quan tâm">${product.amount}</td>
+
+
+                                        </tr>
+                                    </c:forEach>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
 
                 </div>
             </div>

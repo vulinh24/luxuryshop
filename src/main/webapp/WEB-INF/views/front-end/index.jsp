@@ -94,6 +94,102 @@
     </div>
     </section>
 
+    <section class="product__service container">
+        	<div class="inhome">
+        		Dành cho bạn
+        	</div>
+        	<div class="row hihi">
+        		<c:forEach items="${productsSuggest}" var="item">
+        			<div>
+        			<div class="product__item">
+    				                    <c:choose>
+    										<c:when test = "${empty item.productImages }">
+    											<div class="product__item__pic set-bg" data-setbg="http://placehold.it/700x400">
+    													<span class="label">Love</span>
+    												<ul class="product__hover">
+    					                                <c:choose>
+    														<c:when test="${item.userLiked(USER) == true }">
+    															<li onclick="favorite.favorite(${item.id});"><a><img class = "img_${item.id }" src="${pageContext.request.contextPath}/images/redheart.png" alt=""><span>Yêu thích</span></a></li>
+    														</c:when>
+    														<c:otherwise>
+    															<li onclick="favorite.favorite(${item.id});"><a><img class = "img_${item.id }" src="${pageContext.request.contextPath}/images/heart.png" alt=""><span>Yêu thích</span></a></li>
+    														</c:otherwise>
+    													</c:choose>
+    					                                <li><a><img src="${pageContext.request.contextPath}/images/compare.png" alt=""><span>So sánh</span></a></li>
+    					                                <li><a href="${pageContext.request.contextPath}/shop-details/${item.seo}"><img src="${pageContext.request.contextPath}/images/search.png" alt=""><span>Chi tiết</span></a></li>
+    					                            </ul>
+    					                        </div>
+    										</c:when>
+    										<c:otherwise>
+                                                <div class="product__item__pic set-bg"
+                                                     data-setbg="${pageContext.request.contextPath}/file/upload/${item.productImages.get(0).path }">
+                                                    <span class="label">Love</span>
+                                                    <ul class="product__hover">
+                                                        <c:choose>
+                                                            <c:when test="${item.userLiked(USER) == true }">
+                                                                <li onclick="favorite.favorite(${item.id});"><a><img
+                                                                        class="img_${item.id }"
+                                                                        src="${pageContext.request.contextPath}/images/redheart.png"
+                                                                        alt=""><span>Yêu thích</span></a></li>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <li onclick="favorite.favorite(${item.id});"><a><img
+                                                                        class="img_${item.id }"
+                                                                        src="${pageContext.request.contextPath}/images/heart.png"
+                                                                        alt=""><span>Yêu thích</span></a></li>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <li><a><img
+                                                                src="${pageContext.request.contextPath}/images/compare.png"
+                                                                alt=""><span>So sánh</span></a></li>
+                                                        <li>
+                                                            <a href="${pageContext.request.contextPath}/shop-details/${item.seo}"><img
+                                                                    src="${pageContext.request.contextPath}/images/search.png"
+                                                                    alt=""><span>Chi tiết</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                        <div class="product__item__text">
+                            <h6>${item.title }</h6>
+
+                            <c:choose>
+                                <c:when test="${item.amount > 0}">
+                                    <a href="javascript:void(0)" class="add-cart"
+                                       onclick="cart.choose_product_to_cart(${item.id}, 1)">+ Thêm vào giỏ hàng <span
+                                            style="float: right">SL: ${item.amount}</span></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="javascript:void(0)" class="add-cart">Sản phẩm hiện đã bán hết!</a>
+                                </c:otherwise>
+                            </c:choose>
+
+                            <div class="rating d-flex">
+                                <c:forEach begin="1" end="${item.rate }">
+                                    <img width="15px" src="${pageContext.request.contextPath}/images/yellow-star.png">
+                                </c:forEach>
+                                <c:forEach begin="${item.rate + 1 }" end="5">
+                                    <img width="15px" src="${pageContext.request.contextPath}/images/grey-star.png">
+                                </c:forEach>
+                            </div>
+                            <h5><fmt:formatNumber value="${item.price }" type="number"/> <span
+                                    style="text-decoration:line-through; font-size:14px; color:grey;"><fmt:formatNumber
+                                    value="${item.priceOld }" type="number"/></span></h5>
+                            <div class="product__color__select">
+                                <label class="silver" for="pc-1">
+                                    <input type="radio" id="pc-1">
+                                </label>
+                                <label class="active grey" for="pc-2">
+                                    <input type="radio" id="pc-2">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+        			</div>
+        		</c:forEach>
+        	</div>
+        </section>
+
      <section class="product__service container">
     	<div class="inhome">
     		Sản phẩm bán chạy

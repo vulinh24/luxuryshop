@@ -2,9 +2,12 @@ package com.luxuryshop.services;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javassist.scopedpool.SoftValueHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +21,10 @@ public class Chart {
 	
 	@SuppressWarnings("rawtypes")
 	public Map count() {
-		Map<LocalDate, Float> res = new HashMap<>();
-		for(int i = 0; i <= 14; ++i) {
-			LocalDate now = LocalDate.now();
-			LocalDate date = now.minusDays(i);
+		Map<LocalDate, Float> res = new LinkedHashMap<>();
+		LocalDate today = LocalDate.now();
+		LocalDate startDate = today.minus(2, ChronoUnit.WEEKS);
+		for (LocalDate date = today; !date.isBefore(startDate); date = date.minusDays(1)) {
 			Float total = orderRepository.countByDate(Date.valueOf(date));
 			res.put(date, total);
 		}

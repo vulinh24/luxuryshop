@@ -1,6 +1,10 @@
 package com.luxuryshop.controller.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luxuryshop.configurations.WebCommonConfig;
 import com.luxuryshop.entities.*;
+import com.luxuryshop.kafka.UserLogKafka;
+import com.luxuryshop.kafka.service.KafkaProducerService;
 import com.luxuryshop.model.VnpayReturn;
 import com.luxuryshop.repositories.*;
 import com.luxuryshop.services.MyUserDetail;
@@ -54,6 +58,9 @@ public class CheckoutController {
 
     @Autowired
     VnpayDetailRepository vnpayDetailRepository;
+
+    @Autowired
+    KafkaProducerService kafkaProducerService;
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = {"/checkout"}, method = RequestMethod.GET)
@@ -123,6 +130,7 @@ public class CheckoutController {
     public String save(@ModelAttribute(name = "detailOrder") Order detailOrder, final ModelMap model, final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
             HttpSession session = request.getSession();
             if (session.getAttribute("USER") != null) {
                 MyUserDetail udetail = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -130,6 +138,10 @@ public class CheckoutController {
                 detailOrder.setCode(null);
                 detailOrder.setCreatedDate(LocalDateTime.now());
                 detailOrder.setUser(user);
+                // send log message
+                UserLogKafka userLogKafka = new UserLogKafka();
+                userLogKafka.setAction(UserLogKafka.Action.getLabel(UserLogKafka.Action.BUY));
+                userLogKafka.setOwnerId(user.getId());
                 float discount = 0;
                 String ccode = request.getParameter("ccode");
                 if (ccode != null && ccode != "") {
@@ -165,6 +177,9 @@ public class CheckoutController {
                     p.setOrder(detailOrder);
                     saledProducts.add(p);
                     cart.getProductCart().setAmount(cart.getProductCart().getAmount() - cart.getQuantity());
+                    //send log product
+                    userLogKafka.setProductId(p.getProductId());
+                    kafkaProducerService.sendMessage(WebCommonConfig.TOPIC_LOG_KAFKA, null, objectMapper.writeValueAsString(userLogKafka));
                 }
                 proOrderRepository.saveAll(saledProducts);
                 // xoá giỏ hàng đi
@@ -176,6 +191,10 @@ public class CheckoutController {
                     return "redirect:" + vnpayPayment.getUrlVnpayPage(request, detailOrder);
                 }
             } else {
+                // send log message
+                UserLogKafka userLogKafka = new UserLogKafka();
+                userLogKafka.setAction(UserLogKafka.Action.getLabel(UserLogKafka.Action.BUY));
+                userLogKafka.setOwnerId(null);
                 detailOrder.setCode(null);
                 detailOrder.setCreatedDate(LocalDateTime.now());
                 detailOrder.setUser(null);
@@ -226,6 +245,9 @@ public class CheckoutController {
                     p.setOrder(detailOrder);
                     saledProducts.add(p);
                     cart.getProductCart().setAmount(cart.getProductCart().getAmount() - cart.getQuantity());
+                    //send log product
+                    userLogKafka.setProductId(p.getProductId());
+                    kafkaProducerService.sendMessage(WebCommonConfig.TOPIC_LOG_KAFKA, null, objectMapper.writeValueAsString(userLogKafka));
                 }
                 proOrderRepository.saveAll(saledProducts);
                 // xoá giỏ hàng đi
