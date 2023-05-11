@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -92,10 +93,22 @@ public class AdminStatisticController {
     @ResponseBody
     @RequestMapping(value = "/statistic-revenue", method = RequestMethod.GET)
     public List<StatisticRevenue> statisticRevenues(HttpServletRequest request) {
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         List<StatisticRevenue> result = new ArrayList<>();
-        LocalDate now = LocalDate.now();
-        Integer num = productOrderRepository.countSoldProductAtDate(Date.valueOf(now));
-        Float revenue = detailOrderRepository.revenueAtDate(Date.valueOf(now));
+        for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+            Integer numberSold = productOrderRepository.countSoldProductAtDate(Date.valueOf(date));
+            if (numberSold == null) numberSold = 0;
+            Float revenue = detailOrderRepository.revenueAtDate(Date.valueOf(date));
+            if (revenue == null) revenue = 0.0f;
+            StatisticRevenue statisticRevenue = new StatisticRevenue();
+            statisticRevenue.setDate(date);
+            statisticRevenue.setQuantitySold(numberSold);
+            statisticRevenue.setRevenue(revenue);
+            result.add(statisticRevenue);
+        }
         return result;
     }
 }

@@ -60,8 +60,8 @@
               <div class="unit-4-icon mr-4"><img src="${pageContext.request.contextPath}/images/icon1.png"></div>
               <div>
                 <h3>Tư vấn khách hàng</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a  >Đọc thêm</a></p>
+                <p>Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng<p
+                <p><a  ></a></p>
               </div>
             </div>
           </div>
@@ -70,8 +70,8 @@
               <div class="unit-4-icon mr-4"><img src="${pageContext.request.contextPath}/images/icon2.png"></div>
               <div>
                 <h3>Phân tích sản phẩm</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a  >Đọc thêm</a></p>
+                <p>Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng<p
+                <p><a  ></a></p>
               </div>
             </div>
           </div>
@@ -80,8 +80,8 @@
               <div class="unit-4-icon mr-4"><img src="${pageContext.request.contextPath}/images/icon3.png"></div>
               <div>
                 <h3>Giám sát người dùng</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a  >Đọc thêm</a></p>
+                <p>Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng<p
+                <p><a  ></a></p>
               </div>
             </div>
           </div>
@@ -92,8 +92,8 @@
               <div class="unit-4-icon mr-4"><img src="${pageContext.request.contextPath}/images/icon4.png"></div>
               <div>
                 <h3>Bảo hành 12 tháng</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a  >Đọc thêm</a></p>
+                <p>Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng<p
+                <p><a  ></a></p>
               </div>
             </div>
           </div>
@@ -102,8 +102,8 @@
               <div class="unit-4-icon mr-4"><img src="${pageContext.request.contextPath}/images/icon5.png"></div>
               <div>
                 <h3>Nguồn nhập tin cậy</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a  >Đọc thêm</a></p>
+                <p>Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng<p
+                <p><a  ></a></p>
               </div>
             </div>
           </div>
@@ -112,8 +112,8 @@
               <div class="unit-4-icon mr-4"><img src="${pageContext.request.contextPath}/images/icon6.png"></div>
               <div>
                 <h3>Dịch vụ hậu mãi</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a  >Đọc thêm</a></p>
+                <p>Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng - Luxury Shop - Uy Tín - Chất Lượng<p
+                <p><a  ></a></p>
               </div>
             </div>
           </div>

@@ -7,6 +7,6 @@ import java.time.LocalDate;
 @Data
 public class StatisticRevenue {
     private LocalDate date;
-    private int soldAmount;
-    private float revenue;
+    private Integer quantitySold;
+    private Float revenue;
 }
