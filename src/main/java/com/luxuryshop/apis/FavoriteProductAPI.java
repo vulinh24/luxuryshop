@@ -1,7 +1,11 @@
 package com.luxuryshop.apis;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luxuryshop.configurations.WebCommonConfig;
 import com.luxuryshop.entities.Product;
 import com.luxuryshop.entities.User;
+import com.luxuryshop.kafka.UserLogKafka;
+import com.luxuryshop.kafka.service.KafkaProducerService;
 import com.luxuryshop.repositories.UserRepository;
 import com.luxuryshop.services.MyUserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +33,12 @@ public class FavoriteProductAPI {
 	
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	KafkaProducerService kafkaProducerService;
 	
 	@RequestMapping(value = "/add-favorite/{id}", method = RequestMethod.GET)
-	public String index(@PathVariable Integer id,HttpServletRequest request) {
+	public String index(@PathVariable Integer id,HttpServletRequest request) throws Exception{
 		if (request.getSession().getAttribute("USER") == null) return "usernotfound";
 		MyUserDetail detail = 
 				(MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -54,6 +61,13 @@ public class FavoriteProductAPI {
 		query.setParameter(1, user.getId());
 		query.setParameter(2, id);
 		query.executeUpdate();
+		// send log message
+		UserLogKafka userLogKafka = new UserLogKafka();
+		userLogKafka.setAction(UserLogKafka.Action.getLabel(UserLogKafka.Action.LIKE));
+		userLogKafka.setOwnerId(user.getId());
+		userLogKafka.setProductId(id);
+		ObjectMapper objectMapper = new ObjectMapper();
+		kafkaProducerService.sendMessage(WebCommonConfig.TOPIC_LOG_KAFKA, null, objectMapper.writeValueAsString(userLogKafka));
 		return "add";
 	}
 	

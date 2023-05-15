@@ -1,9 +1,7 @@
 package com.luxuryshop.kafka;
 
-import com.luxuryshop.entities.User;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +10,7 @@ public class UserLogKafka {
 
     public enum Action {
         VIEW("view", 2),
+        LIKE("like", 5),
         BUY("buy", -1);
         private String label;
         private Integer point;
