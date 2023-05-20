@@ -37,8 +37,12 @@ public class SolveException {
 	}
 
 	@ExceptionHandler(value = BindException.class)
-	public String handleBind(BindException e) {
-		return "redirect:/customer";
+	public void handleBind(BindException e) {
+		try {
+			response.sendRedirect(request.getContextPath() + "/home/error");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }

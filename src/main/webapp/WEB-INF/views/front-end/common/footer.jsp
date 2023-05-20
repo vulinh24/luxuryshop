@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="footer__copyright__text">
-                    	<p>Copyright © 2021
+                    	<p>Copyright © 2023
                             All rights reserved | This website is made by <a target="_blank">Linh Vũ</a>
                         </p>
                         <p>Copyright © 2020

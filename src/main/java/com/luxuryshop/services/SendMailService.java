@@ -66,4 +66,19 @@ public class SendMailService {
             throw new RuntimeException(e);
         }
     }
+
+    public void sendMailCancelOrder(String mail) {
+        MimeMessage mimeMessage = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+        String htmlMsg = "<h3>Đơn hàng của bạn đã bị hủy. Nếu xảy ra nhầm lẫn xin vui lòng liên hệ lại cửa hàng!</h3>" ;
+        try {
+            helper.setText(htmlMsg, true); // Use this or above line.
+            helper.setTo(mail);
+            helper.setSubject("Luxury Shop - Cancel Order");
+            helper.setFrom(MY_MAIL);
+            sender.send(mimeMessage);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

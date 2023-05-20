@@ -70,7 +70,8 @@ public class AdminControlOrderController {
         order.setIsCancel(true);
         order.setStatus("Đã hủy");
         orderRepository.save(order);
-
+        Thread thread = new Thread(() -> sendMailService.sendMailCancelOrder(order.getCustomerEmail()));
+        thread.start();
         om.writeValue(response.getOutputStream(), "ok");
 
     }
